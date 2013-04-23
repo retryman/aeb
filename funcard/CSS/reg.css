@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+#reg{width:777px; margin:0 auto;}
+#reg h2{ height:45px; line-height:45px; overflow:hidden;}
+#reg h2 span.welcome{ float:left; color:#ffaa00; font-family:"微软雅黑", "宋体"; font-size:20px;}
+#reg h2 span.login{ float:right;}
+#reg h2 span.login a{ display:block; width:123px; height:45px; background:url(images/reg.gif);}
+#reg h2 span.login a:hover{ background-position: -132px 0 ;}
+
+#step_bur{ padding:20px 0; height:61px; overflow:hidden;}
+#step_bur a{ float:left; height:61px; position:relative; margin-left:-15px;}
+#step_bur a span{ display:block; height:61px;}
+
+#step_bur a#step_bur_1{ margin-left:0;}
+#step_bur a#step_bur_1 span{ width:266px; background:url(images/reg.gif) -2px -69px;}
+#step_bur a#step_bur_1:hover span,#step_bur a#step_bur_1 span.current{width:266px; background:url(images/reg.gif) -277px -69px;}
+
+
+#step_bur a#step_bur_2 span{ width:266px; background:url(images/reg.gif) -2px -140px;}
+#step_bur a#step_bur_2:hover span,#step_bur a#step_bur_2 span.current{width:266px; background:url(images/reg.gif) -277px -140px;}
+
+#step_bur a#step_bur_3 span{ width:266px; background:url(images/reg.gif) -2px -211px;}
+#step_bur a#step_bur_3:hover span,#step_bur a#step_bur_3 span.current{width:266px; background:url(images/reg.gif) -277px -211px;}
+
+.reg_form{ padding: 20px 0;}
+.reg_form .msg{ color:#f59795; font-size:12px; height:20px; line-height:20px; padding-left:210px;}
+
+.form_item{ height:52px; line-height:52px; font-size:12px; color:#737373;}
+.form_item span{ float:left; }
+.form_item span.tit{ width:200px; text-align:right; padding-right:10px;}
+.form_item label{ float:left;}
+.form_item label.text{ padding-top:7px;}
+.form_item label.text span{ float:left; height:37px; width:8px; background:url(images/reg.gif) 0 -281px; overflow:hidden;}
+.form_item label.text span.r{ background-position: right -281px;}
+.form_item label.text input{ float:left; height:17px; padding:10px 0; border:none; }
+
+.form_item span.ok{ width:21px; height:21px; background:url(images/reg.gif) -75px -843px; margin-top:10px; margin-left:10px;}
+.form_item span.ng{ width:21px; height:21px; background:url(images/reg.gif) 0 -843px; margin-top:10px; margin-left:10px;}
+
+.form_item .but_reg{width:144px; height:42px; background:url(images/reg.gif) 0 -333px; border:none; cursor:pointer; float:left; margin-right:5px;}
+.form_item .but_regHover{width:144px; height:42px; background:url(images/reg.gif) 0 -333px; border:none; cursor:pointer; float:left; margin-right:5px; background-position: -147px -333px;}
+
+.form_item .but_reset{width:144px; height:42px; background:url(images/reg.gif) 0 -377px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_resetHover{width:144px; height:42px; background:url(images/reg.gif) 0 -377px; border:none; cursor:pointer; float:left;margin-right:5px; background-position: -147px -377px;}
+
+.form_item .but_activate{width:144px; height:42px; overflow:hidden; background:url(images/reg.gif) 0 -421px; border:none; cursor:pointer; float:left; margin-right:5px;}
+.form_item .but_activate:hover{background-position: -147px -421px;}
+
+.form_item .but_complete{width:144px; height:42px; background:url(images/reg.gif) 0 -465px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_complete:hover{background-position: -147px -465px;}
+
+.form_item .but_confirm{width:144px; height:42px; background:url(images/reg.gif) 0 -509px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_confirm:hover{background-position: -147px -509px;}
+
+.form_item .but_jump{width:197px; height:42px; background:url(images/reg.gif) 0 -552px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_jump:hover{background-position: -198px -552px;}
+
+.form_item .but_reback{width:168px; height:42px; background:url(images/reg.gif) 0 -638px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_reback:hover{background-position: -169px -638px;}
+
+.form_item .but_check{width:168px; height:42px; background:url(images/reg.gif) 0 -595px; border:none; cursor:pointer; float:left;margin-right:5px;}
+.form_item .but_check:hover{background-position: -169px -595px;}
+
+
+.step_control{height:24px; line-height:24px; background: url(images/reg.gif) 0 -745px; margin-top:20px; }
+.step_control a{ float:right; width:44px; height:24px; background:url(images/reg.gif) 0 -796px; margin: 0 10px;}
+.step_control a.down{ background-position: -50px -796px;}

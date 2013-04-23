@@ -1,0 +1,10 @@
+/* $Id: profile_pictures.css,v 1.1 2010/04/09 20:27:27 yeputons Exp $ */
+
+/**
+ * @file
+ * Definition for display pictures in views at the right, not like string value
+ */
+
+.profile_pictures_field {
+  float: right;
+}

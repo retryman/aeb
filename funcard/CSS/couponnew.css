@@ -1,0 +1,23 @@
+body{background:url("images/blue/bg.jpg") repeat scroll 0 0 transparent;}
+.content{height:auto;background-color: white;}
+.logo {background: url("images/blue/logo.jpg") no-repeat scroll 0 0 transparent;}
+.cloud {background: url("images/blue/cloud.jpg")  no-repeat scroll 0 0 transparent;}
+.cloud2 {background: url("images/blue/cloud2.jpg")  no-repeat scroll 0 0 transparent;}
+.searchtext {background: url("images/blue/searchbox.jpg")  no-repeat scroll 0 0 transparent;}
+.searchBtn{background: url("images/blue/searchbtn.jpg")  no-repeat scroll 0 0 transparent;}
+.main{height:auto;}
+.content{height:auto;background-color: white;}
+.footer .footlogo {background: url("images/blue/footerlogo.jpg") no-repeat scroll 0 0 transparent;}
+
+#banner{background: url("images/blue/yueryouhui.jpg")  no-repeat scroll 0 0 transparent;width:1002px;height:290px;margin:1px 0 0 1px;}
+#list{ padding:15px;}
+#list dl{ background:url(images/blue/yueryouhui.gif); float:left; width:283px; margin:17px;height:298px;}
+#list dl.hover{ background:url(images/blue/yueryouhui.gif) -293px top;}
+#list dl dt{padding:10px; text-align:center;position:relative;}
+#list dl dt .tagitems{position:absolute;width:280px;height:30px;left:0;top:170px;text-align:center;}
+#list dl dt .tagitems a{border:1px solid #9ACDC9;background-color:#F5F5F5;color:#618362;padding:1px 2px;height:25px;line-height:25px;}
+#list dl dt .tagitems a:hover{text-decoration: underline;}
+#list dl dd{padding:5px 10px;font-family:Microsoft YaHei;}
+#list dl dd h5{ font-size:14px; color:#00b9ef; }
+#list dl dd p{ font-size:12px; color:#666; line-height:22px;height:44px;}
+

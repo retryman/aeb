@@ -1,0 +1,31 @@
+body.notices{background:url("../images/pinknew/bg.jpg") repeat scroll 0 0 transparent;}
+body.notices .logo {background: url("../images/pinknew/logo.jpg") no-repeat scroll 0 0 transparent;}
+body.notices .cloud {background: url("../images/pinknew/cloud.jpg")  no-repeat scroll 0 0 transparent;}
+body.notices .cloud2 {background: url("../images/pinknew/cloud2.jpg")  no-repeat scroll 0 0 transparent;}
+body.notices .searchtext {background: url("../images/pinknew/searchbox.jpg")  no-repeat scroll 0 0 transparent;}
+body.notices .searchBtn{background: url("../images/pinknew/searchbtn.jpg")  no-repeat scroll 0 0 transparent;}
+body.notices .main{height:auto;}
+body.notices .content{height:auto;background-color: white;}
+body.notices .footer .footlogo {background: url("../images/pinknew/footerlogo.jpg") repeat scroll 0 0 transparent;}
+
+.row{width:1002px; margin: 0 auto; overflow:hidden; background:#FFF;}
+#banner{background: url("../images/pinknew/banner.jpg")  no-repeat scroll 0 0 transparent;width:1002px;height:290px;margin:1px 0 0 1px;}
+
+.content-inner{border:1px dashed #d6d6d6;border-width:1px 0 0;}
+
+.leftbar{float:left;width:221px;border:1px dashed #d6d6d6;border-width:0 1px 0 0;}
+.leftbar ul li{padding-left:38px;}
+.leftbar ul li.parent{border:1px dashed #fd96c0;border-width:1px 0;height:34px;line-height:34px;background-color:#ffebf3;}
+.leftbar ul li.parent a{font-weight:bold;font-size:18px;color:#feaccd;}
+.leftbar ul li.child{padding-top:2px;padding-bottom:2px;}
+.leftbar ul li.child a{color:#939393;font-size:12px;}
+.leftbar ul li.cur{background-color:#fe9bc3;}
+.leftbar ul li.cur a{color:white;}
+.right-box{padding: 0 0 0 221px;}
+.probox{margin:20px 0 0 30px;}
+.probox ul li{overflow:hidden;float:left;width:176px;height:170px;border:1px dashed #d6d6d6;text-align: center;padding-top:10px;margin-right:5px;}
+.probox ul li span{color:#828282;font-weight:bold;padding:0 2px;line-height:11px;}
+.newslist{margin:20px 0 0 35px;padding:0 0 20px;}
+.newslist li{border:1px dashed #d6d6d6;border-width:0 0 1px;width:710px;padding:5px 0 4px;}
+.newslist li a{color:#939393;}
+.newslist li a:hover{text-decoration: underline;}

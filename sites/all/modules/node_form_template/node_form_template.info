@@ -1,0 +1,11 @@
+; $Id: node_form_template.info,v 1.1 2008/12/21 00:26:49 effulgentsia Exp $
+name = node_form template
+description = Changes the node_form themehook from using a function to using a template, providing greater control to module and theme developers.
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-04-27
+version = "6.x-1.0-beta3"
+core = "6.x"
+project = "node_form_template"
+datestamp = "1240859798"
+

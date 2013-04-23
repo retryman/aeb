@@ -1,0 +1,5 @@
+name = Camp
+description = control the output of the camp pages
+package = AEB
+core = 6.x
+version = 6.x-1.0

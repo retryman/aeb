@@ -1,0 +1,10 @@
+<?php
+// $Id: node_form_template.install,v 1.1 2008/12/21 00:26:49 effulgentsia Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function node_form_template_install() {
+  // We need our hook_theme() to run after node.module's hook_theme().
+  db_query("UPDATE {system} SET weight = %d WHERE name = '%s' AND type = '%s'", 1, 'node_form_template', 'module');
+}

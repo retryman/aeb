@@ -1,0 +1,5 @@
+name = Content Custom
+description = Custom the content of the website.
+package = AEB
+core = 6.x
+version = 6.x-1.0

@@ -1,0 +1,271 @@
+<?php 
+/*
+ * hook_menu
+ */
+function camp_menu(){	
+  $items['admin/settings/camp'] = array(
+    'title'            => '探营首页设置',
+    'description'   => '设置探营首页中部的四个区域',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('camp_admin_homepage_fourcolomn'),
+    'file' => 'camp.admin.inc',
+  	'access arguments' => array('administer nodes'),
+   );
+  $items['camp/ajaximg'] = array(
+    'page callback' => '_camp_ajaximg',
+  	 'access callback' => TRUE,
+     'type' => MENU_CALLBACK,
+   );
+   
+   return $items;
+}
+
+function _camp_ajaximg(){
+   $nid = $_GET['nid'];
+   $node = node_load($nid);
+   $node = node_build_content($node, $teaser, $page);
+   
+   $image = theme('imagecache', 'node-gallery-display', $node -> field_node_gallery_image[0]['filepath']);
+
+   echo '<table width="510px" height="445px" style="margin:0 0 0 5px;"><tr><td>'.$image.'</td></tr></table>'.$node -> content['image_navigator']['#value'].'###&&&'.$node -> body;
+}
+
+/*
+ * hook_init
+ */
+function camp_init(){
+	global $nodetype;//在content_custom.module的hook_init方法中定义
+
+	if($nodetype == 'apply_mem' || $nodetype == 'apply_org'){
+		if(!user_access('access administration menu')){
+			unset($_SESSION['messages']);
+			drupal_set_message('提交成功');
+			drupal_goto('camp');
+		}
+	}
+}
+
+
+
+
+/**
+ * Implementation of hook_block().
+ */
+function camp_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op) {  	
+  	case 'list':	  		
+	    $blocks[0] = array(
+	      'info' => t('Camp five flowers'),
+	    );
+	    $blocks[1] = array(
+	      'info' => t('Camp two links'),
+	    );
+	    $blocks[2] = array(
+	      'info' => t('Four columns'),
+	    );
+	    return $blocks;
+    
+   case 'view':	   
+	    switch ($delta) {
+	      case 0: 	
+	        $block = array(
+	          'subject' => t('Camp five flowers'),	         
+	          'content' => _camp_block_five_flowers(),
+	          );
+	        break;
+	      case 1: 	
+	        $block = array(
+	          'subject' => t('Camp two links'),	         
+	          'content' => _camp_block_two_links(),
+	          );
+	        break;
+	      case 2: 	
+	        $block = array(
+	          'subject' => t('Four columns'),	         
+	          'content' => _camp_block_four_columns(),
+	          );
+	        break;		        		        	     		        		        	    		        		        	        		                	        		        	 	        	 	        	 	        	        
+    }
+    return $block;
+  }
+}
+
+/**
+ * show Four columns block for camp homepage
+ * @return unknown_type
+ */
+function _camp_block_four_columns(){
+	$output = cache_get('_camp_block_four_columns_output_value') -> data;
+	if($output){
+		return $output;
+	}
+	
+	$set_value = unserialize(variable_get('camp_admin_homepage_fourcolomn_value',''));
+	
+	for($j = 1; $j < 5; $j++){
+		
+		$output_inner = '';
+		for($i = 1; $i < 7; $i++){
+			
+			//get the view count by the url
+			$viewcount = _camp_block_four_columns_get_viewcount($set_value['camp_url'.$j.$i]);
+			$output_inner .= '<li>  
+                              <div class="views-field-title">
+                                <span><a title="'.$set_value['camp_title'.$j.$i].'" href="'.$set_value['camp_url'.$j.$i].'">'.$set_value['camp_title'.$j.$i].'</a></span>
+                              </div>  
+  							  <div class="views-field-totalcount"><span class="field-content">'.$viewcount.'</span></div>
+								<div class="clear"></div>
+  							  </li>';
+		}
+		$output .= '<div class="column">
+					   <div class="middle">
+						 <div class="columnlabel">
+                          <h2>'.$set_value['title'.$j].'</h2> 
+                          <a class="more" href="/campmore"> + 更多  </a>
+                         </div>
+						  <ul>'.$output_inner.'</ul>
+						</div>
+					</div>';
+	}
+	cache_set('_camp_block_four_columns_output_value', $output);
+	return $output;
+}
+
+
+/**
+ * show five flowers block for camp homepage
+ * @return unknown_type
+ */
+function _camp_block_five_flowers(){
+	$output="";
+	$sql = "SELECT DISTINCT(node.nid) AS nid,
+		   users.name AS users_name,
+		   users.uid AS uid,
+		   node.title AS title,
+		   node_counter.totalcount AS node_counter_totalcount
+			 FROM node node 
+			 INNER JOIN users users ON node.uid = users.uid
+			 LEFT JOIN node_counter node_counter ON node.nid = node_counter.nid
+			 WHERE (node.status <> 0) AND (node.type in ('member_camp'))
+			 GROUP BY nid
+			  ORDER BY node_counter_totalcount DESC limit 0,5
+			";
+	$result = db_query($sql);
+	$output_inner = '';
+	while($row = db_fetch_object($result)){
+		$output_inner .= '<div class="item">
+						  <ul>
+							<li>
+						  <a href="user/'.$row -> uid.'">'.$row -> users_name .'</a>
+						  </li>
+						  <li>
+						  '.l($row -> title, 'node/'.$row -> nid).'
+						  </li>
+						  </ul>
+						 </div>';
+	}
+	
+	global $user;
+	$ownCampLink = 'node/add/member-camp';
+	if($user -> uid ){
+//		$sql = "select nid from {node} where type = 'member_camp' and uid = %d order by created desc limit 0,1";
+//		$result = db_query($sql, $user -> uid);
+//		if($row = db_fetch_object($result)){
+//			$ownCampLink = 'node/'.$row -> nid;
+//		}
+//		else{
+//			$ownCampLink = 'node/add/member-camp';
+//		}
+		
+	}
+	else{
+		$ownCampLink = '/user/login';
+	}
+	
+	
+	$output = '<div class="five-flowers">
+				<h2>帮友探营</h2><a class="more" href="/mem/campmore">+ 更多</a>
+				<div class="clear"></div>
+				'.$output_inner.'
+				<a class="linkown" href="'.$ownCampLink.'">晒晒我的探营贴</a>
+			   </div>';
+	return $output;
+}
+
+/**
+ * show two links block for camp homepage
+ * @return unknown_type
+ */
+function _camp_block_two_links(){
+	$output = '<div style="position: relative; left: 0pt; top: 0pt;width:966px">
+	<img src="/sites/all/themes/zen/zen-internals/images/camp/bottom2link-bg.png" width="966px"/> 
+	<a href="node/add/apply-org" style="color: rgb(118, 177, 30); font-size: 16px; font-weight: bold; position: absolute; left: 400px; top: 80px;">报名参加探营基地</a> 
+	<a href="node/add/apply-mem" style="color: rgb(118, 177, 30); display: block; font-size: 16px; font-weight: bold; position: absolute; left: 635px; top: 80px;">报名参加免费体验</a>
+	</div>';
+	return $output;
+}
+
+/**
+ * 通过url获取该文章内容的访问量
+ * @param $url
+ */
+function _camp_block_four_columns_get_viewcount($url){
+	//$url = 'http://www.aierbang.org/campreport/523';
+	if(!$url){
+		return '';
+	}
+	$url_arr = explode('/', trim($url));
+	if(!is_numeric($url_arr[4])){
+		return '';
+	}
+	
+	$nid = $url_arr[4];
+	$sql = "SELECT nc.totalcount
+			FROM node n
+			LEFT JOIN node_counter nc ON n.nid = nc.nid
+			WHERE n.status = 1 
+			and n.type = 'node_gallery_gallery' 
+			and n.nid = %d
+			GROUP BY n.nid";
+	$result = db_query($sql, $nid);
+	if($row = db_fetch_object($result)){
+		return $row -> totalcount;
+	}
+	else{
+		return '';
+	}
+	
+}
+
+function  need_camp_form($form_state){
+  $form['body'] = array(
+    '#type' => 'textfield',
+    '#default_value' => '请填入育儿机构或商户名称',
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => '帮我去探营'
+  );
+  drupal_add_js('
+  $(document).ready(function(){
+  	 $("#edit-body").focus(function(){
+  	    if($(this).attr("value") == "请填入育儿机构或商户名称"){
+  	 		$(this).attr("value", "");
+  	 	}	
+	 });	 
+  })
+  ', 'inline');
+  return $form;
+}
+
+function need_camp_form_submit($form, &$form_state){
+  global $user;
+  $node = new StdClass();
+  $node -> type = 'need_camp';
+  $node -> comment = 2;
+  $node -> title = $form_state['values']['body'];
+  $node -> body = $form_state['values']['body'];
+  $node -> uid = $user->uid;
+  node_save($node);
+  drupal_set_message("爱儿帮已经记录了您的请求, 感谢您:) ");
+}

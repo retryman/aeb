@@ -1,0 +1,145 @@
+# $Id: profile_pictures.ru.po,v 1.2 2010/05/17 09:02:09 yeputons Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-17 11:49+0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Egor Suvorov <egor_suvorov@mail.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: Russia\n"
+
+#: profile_pictures.info:2
+msgid "Profile pictures"
+msgstr "Изображения в профиле"
+
+#: profile_pictures.info:3
+msgid "Add image field to a core profile's categories"
+msgstr "Добавляет поле \"изображение\" в профиль"
+
+#: profile_pictures.admin.inc:20
+msgid "edit %title"
+msgstr "редактировать %title"
+
+#: profile_pictures.admin.inc:34
+msgid "add new %type"
+msgstr "добавить новый %title"
+
+#: profile_pictures.admin.inc:47
+msgid "Image properties"
+msgstr "Свойста изображения"
+
+#: profile_pictures.admin.inc:50
+msgid "Maximum size of uploaded image (in KiB, zero if none)"
+msgstr "Максимальный размер загружаемого изображения (в КиБ, 0 - без ограничений)"
+
+#: profile_pictures.admin.inc:58
+msgid "Maximum dimensions of uploaded image (WxH, in pixels)"
+msgstr "Максимальное разрешение загружаемого изображения (ШxВ, в пикселях)"
+
+#: profile_pictures.admin.inc:67
+msgid "--- No postprocessing ---"
+msgstr "--- Без постобработки ---"
+
+#: profile_pictures.admin.inc:77
+#: views/profile_pictures_field.inc:66
+msgid "ImageCache preset"
+msgstr "Настройки ImageCache"
+
+#: profile_pictures.admin.inc:89
+#: profile_pictures.admin.inc:109
+msgid "File saving path"
+msgstr "Путь сохранения файла"
+
+#: profile_pictures.admin.inc:95
+msgid "Available tokens"
+msgstr "Доступные подстановки"
+
+#: profile_pictures.admin.inc:112
+msgid "You can change this path at !url"
+msgstr "Вы можете изменить этот путь на !url"
+
+#: profile_pictures.admin.inc:113
+msgid "User settings page"
+msgstr "Страница настроек пользователей"
+
+#: profile_pictures.admin.inc:138
+msgid "Please, enter an non-negative number"
+msgstr "Пожалуйста, введите неотрицательное целое число"
+
+#: profile_pictures.admin.inc:147
+msgid "Please, input dimensions in format WxH"
+msgstr "Пожалуйста, введите разрешение в формате ШxВ"
+
+#: profile_pictures.module:32
+msgid "picture"
+msgstr "изображение"
+
+#: profile_pictures.module:62
+msgid "Upload"
+msgstr "Загрузка"
+
+#: profile_pictures.module:82
+msgid "Delete"
+msgstr "Удалить"
+
+#: profile_pictures.module:151
+msgid "Failed to upload the picture for %type"
+msgstr "Не удалось загрузить изображение для %type"
+
+#: profile_pictures.module:226
+msgid "File name"
+msgstr "Имя файла"
+
+#: profile_pictures.module:227
+msgid "File extension"
+msgstr "Расширение файла"
+
+#: profile_pictures.module:228
+msgid "Field name"
+msgstr "Имя поля"
+
+#: profile_pictures.theme.inc:10
+msgid "Token"
+msgstr "Подстановка"
+
+#: profile_pictures.theme.inc:10
+msgid "Replacement value"
+msgstr "Значение замены"
+
+#: profile_pictures.theme.inc:13
+msgid "tokens"
+msgstr "подстановки"
+
+#: views/profile_pictures_field.inc:35
+msgid "Maximum height (0 for no limit)"
+msgstr "Максимальная высота (0 - без ограничений)"
+
+#: views/profile_pictures_field.inc:40
+msgid "Maximum width (0 for no limit)"
+msgstr "Максимальная ширина (0 - без ограничений)"
+
+#: views/profile_pictures_field.inc:56
+msgid "--- Use maximum dimensions settings ---"
+msgstr "--- Использовать настройки разрешения ---"
+
+#: views/profile_pictures_field.inc:69
+msgid "Please, use only imagecache preset or maximum dimensions settings"
+msgstr "Пожалуйста, используйте либо настройки ImageCache, либо настройки максимального разрешения"
+
+#: views/profile_pictures_field.inc:77
+msgid "Maximum height must be a non-negative integer"
+msgstr "Максимальная высота должна быть неотрицательным целым числом"
+
+#: views/profile_pictures_field.inc:81
+msgid "Maximum width must be non-negative integer"
+msgstr "Максимальная ширина должна быть неотрицательным целым числом"
+
+#, fuzzy
+#~ msgid "Imagecache preset"
+#~ msgstr "Свойста изображения"
+

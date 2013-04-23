@@ -1,0 +1,395 @@
+<?php 
+/**
+ * Implementation of hook_form_alter().
+ */
+function comment_custom_form_alter(&$form, $form_state, $form_id) {
+	if($form_id == 'comment_form'){
+		$node = node_load($form['nid']['#value']);		
+		if($node -> type == 'orgnization'){//only for orgnization node type
+			
+			$vote = array();
+			if(arg(1) == 'edit'){//edit form
+				$sql = "select * from {comment_custom} where cid = %d";
+				$result = db_query($sql, $form['cid']['#value']);
+				while($row = db_fetch_object($result)){
+					$vote['vote1'] = $row -> vote1;
+					$vote['vote2'] = $row -> vote2;
+					$vote['vote3'] = $row -> vote3;
+					$vote['money'] = $row -> money;
+					$vote['other'] = unserialize($row -> other);
+					$vote['labels'] = unserialize($row -> labels);
+				}
+			}			
+			
+			$form_values = _comment_custom_get_comment_form_values($node);
+			$form['node-type'] = array('#type' => 'hidden',
+			'#value' => 'orgnization',
+			);	
+			$form['vote'] = array(
+			'#type' => 'fieldset',
+			'#weight' => -3,
+			'#attributes' => array('class' => 'vote-group'),
+			);
+			
+			
+			$form['vote']['vote1'] = array('#type' => 'select',
+			'#title' => $form_values['vote1'],
+			'#options' => array('-1' => '请选择' , '0' =>'0', '1' =>'1', '2' =>'2', '3' =>'3', '4' =>'4'),
+			'#weight' => -8,
+			'#default_value' => $vote['vote1']?(int)$vote['vote1']:'',
+			'#required' => true,		
+			);
+			$form['vote']['vote-1'] = array('#type' => 'hidden',
+			'#value' => $form_values['vote1'],	
+			);
+			
+			
+			$form['vote']['vote2'] = array('#type' => 'select',
+			'#options' =>  array('-1' => '请选择' , '0' =>'0', '1' =>'1', '2' =>'2', '3' =>'3', '4' =>'4'),
+			'#weight' => -7,
+			'#title' => $form_values['vote2'],
+			'#default_value' => $vote['vote2']?$vote['vote2']:'',
+			'#required' => true,
+			);
+			$form['vote']['vote-2'] = array('#type' => 'hidden',
+			'#value' => $form_values['vote2'],
+			);		
+			
+			$form['vote']['vote3'] = array('#type' => 'select',
+			'#options' =>  array('-1' => '请选择' , '0' =>'0', '1' =>'1', '2' =>'2', '3' =>'3', '4' =>'4'),
+			'#weight' => -6,
+			'#title' => $form_values['vote3'],
+			'#default_value' => $vote['vote3']?$vote['vote3']:'',
+			'#required' => true,
+			);
+			$form['vote']['vote-3'] = array('#type' => 'hidden',
+			'#value' => $form_values['vote3'],
+			);	
+			
+			
+			$form['vote']['price'] = array('#type' => 'textfield',		
+			'#weight' => -5,
+			'#title' => '费用',
+			'#default_value' => $vote['money']?$vote['money']:'',		
+			);
+			$form['fivestar_rating']['#weight'] = -10;
+			$form['submit']['#value'] = '';
+			$form['submit']['#suffix'] ='<div class="clear"></div>';
+			if($form_values['classified']['title']){//not all the orgnizations have classified
+				$form['classified'] = array('#type' => 'checkboxes',				
+				'#weight' => 1,
+				'#title' => $form_values['classified']['title'],
+				'#options' => $form_values['classified']['options'],
+				'#default_value' => $vote['other']?$vote['other']:array(),				
+				'#suffix' => '<div class="clear"></div>',	
+				);
+				$form['classified-label'] = array('#type' => 'hidden',				
+				'#value' => $form_values['classified']['title'],			
+				);							
+			}			
+	    }
+	    else if($node -> type == 'node_gallery_gallery'){
+	    	$form['submit']['#value'] = '';
+	    }
+	    
+		//if(arg(0) == 'comment'){
+	    //	$form['submit']['#value'] = '';
+		//}
+
+	}
+}
+
+function _comment_custom_get_comment_form_values(&$node){
+	$form_values = array();
+	
+	
+	$form_values['vote3'] = '性价比';
+	foreach($node -> taxonomy as $key => $term){
+		
+		if($form_values['vote1']){
+			break;
+		}
+		
+		switch($key){
+			case 117://'产检生育'
+				$form_values['vote1'] = '医疗水平';
+				$form_values['vote2'] = '设施与环境';				
+				$form_values['classified']['title'] = '医院特色';
+				$form_values['classified']['options'] = array('家属陪产' => '家属陪产',  '导乐服务' => '导乐服务',  '家庭套房' => '家庭套房');
+			break;
+			case 151://'生活服务'
+				$form_values['vote1'] = '环境与服务';
+				$form_values['vote2'] = '口味';				
+				//$form_values['classified']['title'] = '医院特色';
+				//$form_values['classified']['options'] = array('家属陪产',  '导乐服务',  '家庭套房');
+			break;
+			case 144://'幼儿园'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';				
+				$form_values['classified']['title'] = '幼儿园特色';
+				$form_values['classified']['options'] = array('双语' => '双语', '全英文' => '全英文', '艺术' => '艺术', '潜能开发' =>'潜能开发', '传统教育' =>'传统教育');
+			break;
+			case 148://'早教中心'
+				$form_values['vote1'] = '课程质量';
+				$form_values['vote2'] = '设施与环境';				
+				$form_values['classified']['title'] = '早教特色';
+				$form_values['classified']['options'] = array('知识类' => '知识类',  '运动类' => '运动类', '音乐类 ' => '音乐类 ', '美术类' => '美术类', '亲子类' => '亲子类');
+			break;
+			case 134://'少儿培训'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';				
+				//$form_values['classified']['title'] = '医院特色';
+			    //$form_values['classified']['options'] = array('家属陪产',  '导乐服务',  '家庭套房');
+			break;
+			case 131://'家政服务'
+				$form_values['vote1'] = '保姆质量';
+				$form_values['vote2'] = '公司管理';				
+				$form_values['classified']['title'] = '服务种类';
+				$form_values['classified']['options'] = array('月嫂' => '月嫂', '育儿嫂' => '育儿嫂', '住家保姆' => '住家保姆', '小时工' => '小时工');
+			break;
+			case 132://'小学'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';				
+				//$form_values['classified']['title'] = '医院特色';
+				//$form_values['classified']['options'] = array('家属陪产',  '导乐服务',  '家庭套房');
+			break;
+			case 121://'儿科指南'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '医师水平';				
+				//$form_values['classified']['title'] = '医院特色';
+				//$form_values['classified']['options'] = array('家属陪产',  '导乐服务',  '家庭套房');
+			break;																					
+		}
+	}
+	
+	return $form_values;
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function comment_custom_comment(&$a1, $op) {
+	switch($op){
+		case 'validate':			
+			if($a1['node-type'] == 'orgnization'){//only for orgnization node type
+				
+				if($a1['vote1'] == '-1'){
+					form_set_error('vote1', '请填写'.$a1['vote-1']);
+				}
+				if($a1['vote2'] == '-1'){
+					form_set_error('vote2', '请填写'.$a1['vote-2']);
+				}
+				if($a1['vote3'] == '-1'){
+					form_set_error('vote3', '请填写'.$a1['vote-3']);
+				}
+		
+				if($a1['price'] && !is_numeric($a1['price'])){
+					form_set_error('price', '请填写有效的数字');
+				}
+				
+			}
+			break;		
+		case 'insert':			
+			if($a1['node-type'] == 'orgnization'){//only for orgnization node type
+				
+				$sql = "insert into {comment_custom} values(%d, %d, %d, %d, %f, '%s', '%s')";
+				
+			    db_query($sql, $a1['cid'], $a1['vote1'], $a1['vote2'], $a1['vote3'], $a1['price'], 
+			    		serialize($a1['classified']), serialize(array('vote1' => $a1['vote-1'], 'vote2' => $a1['vote-2'], 'classified-label' => $a1['classified-label'])));
+			    
+			}
+			break;	
+		case 'view':					
+			$sql = "select * from {comment_custom} where cid = %d";
+			$result = db_query($sql, $a1 -> cid);
+			while($row = db_fetch_object($result)){
+				$a1 -> custom['vote1'] = $row -> vote1;
+				$a1 -> custom['vote2'] = $row -> vote2;
+				$a1 -> custom['vote3'] = $row -> vote3;
+				$a1 -> custom['money'] = $row -> money;
+				$a1 -> custom['other'] = unserialize($row -> other);
+				$a1 -> custom['labels'] = unserialize($row -> labels);
+			}			
+			break;
+		case 'delete':
+			$sql = "delete from {comment_custom} where cid = %d";
+			$result = db_query($sql, $a1 -> cid);
+	
+			//for the argument comment
+			db_query("delete from {comment_argument} where cid = %d", $a1 -> cid);
+
+			break;
+		case 'update':
+			if($a1['node-type'] == 'orgnization'){//only for orgnization node type
+				
+				$sql = "update {comment_custom} set vote1=%d, vote2=%d, vote3=%d, money=%f, other='%s', labels='%s' where cid=%d";
+				
+			    db_query($sql, $a1['vote1'], $a1['vote2'], $a1['vote3'], $a1['price'], serialize($a1['classified']), 
+			    serialize(array('vote1' => $a1['vote-1'], 'vote2' => $a1['vote-2'], 'classified-label' => $a1['classified-label'])), $a1['cid']);
+			    
+			}
+			break;			
+		
+	}	
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function comment_custom_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+	switch($op){
+		case 'view':
+			if($node -> type == 'orgnization'){
+				$sql = "select avg(cc.vote1) as vote1,avg(cc.vote2) as vote2,avg(cc.vote3) as vote3 from {comments} 
+						c inner join {comment_custom} cc on cc.cid = c.cid where c.nid = %d";
+				$result = db_query($sql, $node -> nid);
+				$votes = array();
+				while($row = db_fetch_object($result)){
+					$votes = $row;
+				}
+				
+				$sql = "select avg(cc.money) as money from {comments} 
+						c inner join {comment_custom} cc on cc.cid = c.cid where c.nid = %d and cc.money>0";
+				$result = db_query($sql, $node -> nid);
+				$money = array();
+				while($row = db_fetch_object($result)){
+					$money = $row;
+				}
+				//get the labels
+				$labels = _comment_custom_get_comment_form_values($node);
+				
+				$node -> average['votes'] = $votes;
+				$node -> average['money'] = $money;
+				$node -> average['labels'] = $labels;
+			}
+			
+			if($node -> type == 'argument'){
+				$node -> upcomment = _comment_custom_get_argument_comment(1);
+				$node -> downcomment = _comment_custom_get_argument_comment(2);
+				$node -> middlecomment = _comment_custom_get_argument_comment(3);
+				$uparg = Array ( 'content_type' => 'node', 'content_id' => $node -> nid, 'value_type' => 'points', 'tag' => 'vote', 'function' => 'positives' ); 
+				$node -> upvotecount = (int)votingapi_select_single_result_value($uparg);
+				$downarg = Array ( 'content_type' => 'node', 'content_id' => $node -> nid, 'value_type' => 'points', 'tag' => 'vote', 'function' => 'negatives' ); 
+				$node -> downvotecount = (int)votingapi_select_single_result_value($downarg);				
+			}
+			break;
+	}
+}
+
+/**
+ * get the comment of the argument node type
+ * 
+ * @param $type
+ * the type of the comment
+ * 
+ */
+function _comment_custom_get_argument_comment($type){
+	$sql = "select c.comment,c.cid,c.uid,u.name,c.timestamp from {comments} c 
+			inner join {users} u on u.uid = c.uid 
+			inner join {comment_argument} ca on ca.cid = c.cid 
+			where ca.type = %d order by c.timestamp desc";
+	$sql_count = "select count(c.cid) from {comments} c 
+			inner join {users} u on u.uid = c.uid 
+			inner join {comment_argument} ca on ca.cid = c.cid 
+			where ca.type = %d";
+	$result = pager_query($sql, 10, $type, $sql_count, $type);
+	
+	$data = array();
+	global $user;
+	$i = 0;	
+	while($row = db_fetch_object($result)){
+		$data[$i]['uid'] = $row -> uid;
+		$data[$i]['name'] = $row -> name;
+		$data[$i]['cid'] = $row -> cid;
+		$data[$i]['time'] = $row -> timestamp;
+		
+		if(($user -> uid == $row -> uid)){
+			$data[$i]['edit'] = l('edit', 'comment/edit/'.$row -> cid);
+			$data[$i]['delete'] = l('delete', 'comment/delete/'.$row -> cid);
+		}
+		
+		$data[$i]['comment'] = $row -> comment;
+		$i++;
+	}
+	return $data;
+}
+
+
+function comment_custom_preprocess_node(&$var){
+	if($var['type'] == 'orgnization'){//为商户信息 查询第一个评论的用户		
+		$sql = 'select uid,name from {comments} where nid=%d order by timestamp asc limit 0,1';
+		if($result = db_fetch_object(db_query($sql, $var['nid']))){			
+			$var['fc_author']['name'] = $result -> name;
+			$var['fc_author']['uid'] = $result -> uid;
+		}
+	}
+}
+
+function comment_custom_argument_form($form, $type){
+	$form = array();
+	switch($type){
+		case 1:
+			$header = '发表正方观点';
+			break;
+		case 2:
+			$header = '发表反方观点';
+			break;
+		case 3:
+			$header = '发表第三方观点';
+			break;						
+	}
+	$form['comment'] = array(
+	'#prefix' => '<div class="theader">'.$header.'</div>',
+	'#type' => 'textarea',
+	'#resizable' => false,
+	'#required' => true,
+	'#title' => '评论', 	
+	);
+	$form['ctype'] = array(
+	'#type' => 'hidden',
+	'#value' => $type,
+	);
+	$form['nid'] = array(
+	'#type' => 'hidden',
+	'#value' => arg(1),
+	);
+	$form['button']=array(
+	'#type' => 'submit',
+	'#value' => '发表',
+	);
+	return $form;
+}
+
+function comment_custom_argument_form_submit($form, &$form_state){
+	$values = $form_state['values'];
+	global $user;
+
+	$sql = "INSERT INTO {comments} (nid, pid, uid, subject, comment, format, hostname, timestamp, status, thread, name, mail, homepage) 
+			VALUES (%d, %d, %d, '%s', '%s', %d, '%s', %d, %d, '%s', '%s', '%s', '%s')";
+   $result = db_query($sql, $values['nid'], 0, $user->uid, '', $values['comment'], 1, ip_address(), time(), 0, '', $user -> name, null, null);
+   if($result){
+   		$cid = db_last_insert_id('comments', 'cid');
+   		_comment_update_node_statistics($values['nid']);
+   		db_query("insert into {comment_argument} (cid, type) values(%d, %d)", $cid, $_POST['ctype']);
+   		drupal_set_message('提交成功！');
+   }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

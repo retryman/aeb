@@ -1,0 +1,68 @@
+body { font: 1em "Trebuchet MS", verdana, arial, sans-serif; font-size: 100%; }
+input, textarea { font-family: Arial; font-size: 125%; padding: 7px; }
+label { display: block; } 
+
+.infiniteCarousel {
+  width: 960px;
+  position: relative;
+}
+
+.infiniteCarousel .wrapper {
+  width: 880px; /* .infiniteCarousel width - (.wrapper margin-left + .wrapper margin-right) */
+  overflow: auto;
+  min-height: 10em;
+  margin: 0 40px;
+  position: absolute;
+  top: 0;
+}
+
+.infiniteCarousel ul.users a img {
+  border: 1px solid yellow;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.infiniteCarousel .wrapper ul.users {
+  width: 9999px;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  top: 0;
+}
+
+.infiniteCarousel ul.users li.user-item {
+  display:block;
+  float:left;
+  padding: 10px 10px 10px 3px;
+  height: 95px;
+  width: 134px;
+  position:relative;
+}
+.infiniteCarousel ul.users li.user-item:hover .user-info{
+	display:block;
+}
+.infiniteCarousel ul.users li.user-item a img {
+  display:block;
+}
+
+.infiniteCarousel .arrow {
+  display: block;
+  height: 30px;
+  width: 30px;
+  text-indent: -999px;
+  position: absolute;
+  top: 47px;
+  cursor: pointer;
+}
+
+.infiniteCarousel .forward {
+    background: url(images/right-btn.png) no-repeat 0 0;
+  right: 6px;
+}
+
+.infiniteCarousel .back {
+    background: url(images/left-btn.png) no-repeat 0 0;
+  left: 6px;
+}

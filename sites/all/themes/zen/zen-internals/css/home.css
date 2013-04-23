@@ -1,0 +1,28 @@
+ul li{color: white;list-style: disc inside none; padding:2px 0 2px 60px;font-size:14px;}
+ul li a{text-decoration: none;color: white;}
+ul li a:hover{text-decoration: underline;}
+h2{color:white;margin:0 0 0 30px;font-size:21px;padding-left:30px;line-height:27px;}
+.box12 h2{margin-top:54px;background:url("../images/start/box12icon.jpg") no-repeat scroll -1px 3px transparent;}
+.box15 h2{margin-top:30px;background:url("../images/start/box15icon.jpg") no-repeat scroll -1px 3px transparent;}
+.box23 h2{margin-top:54px;background:url("../images/start/box23icon.jpg") no-repeat scroll -1px 3px transparent;}
+.box34 h2{margin-top:30px;background:url("../images/start/box34icon.jpg") no-repeat scroll -1px 3px transparent;}
+
+.box1{width:197px;height:185px;float:left;}
+.box2{width:197px;height:184px;float:left;}
+.box3{width:197px;height:182px;float:left;}
+.box11{background:url("../images/start/boxbg11.jpg") no-repeat;}
+.box12{background-color:#ffa133;)}
+.box13{background:url("../images/start/box13bg.jpg") no-repeat;}
+.box14{background:url("../images/start/box14bg.jpg") no-repeat;}
+.box15{background-color:#9ad072;}
+.box21{background:url("../images/start/box21bg.jpg") no-repeat;}
+.box22{background:url("../images/start/box22bg.jpg") no-repeat;}
+.box23{background-color:#ffcc00;}
+.box24{background:url("../images/start/box24bg.jpg") no-repeat;}
+.box25{background:url("../images/start/box25bg.jpg") no-repeat;}
+.box31{background:url("../images/start/box31bg.jpg") no-repeat;}
+.box32{background:url("../images/start/box32bg.jpg") no-repeat;}
+.box33{background:url("../images/start/box33bg.jpg") no-repeat;}
+.box34{background-color:#ff8bba;}
+.box35{background:url("../images/start/box35bg.jpg ") no-repeat;}
+.content{padding-left:8px;}

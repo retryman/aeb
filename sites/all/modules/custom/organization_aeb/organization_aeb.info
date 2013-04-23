@@ -1,0 +1,7 @@
+name = Organization
+description = Control the data of the organizations.
+package = AEB
+core = 6.x
+version = 6.x-1.0
+dependencies[] = taxonomy
+dependencies[] = hierarchical_select

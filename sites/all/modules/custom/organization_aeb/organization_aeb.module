@@ -1,0 +1,247 @@
+<?php
+/*
+ * hook_menu
+ */
+function organization_aeb_menu(){
+	$items = array();
+	$items['organization_ajax'] = array(
+      'access callback' => true,
+  	  'page callback' => '_organization_aeb_ajax',
+      'type' => MENU_CALLBACK,
+    );
+  $items['camp/%'] = array(
+    'page callback' => 'goto_camp',
+    'page arguments' => array(1),
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  );
+    return $items;
+}
+
+function goto_camp($oid){
+  $nid = db_result( db_query("SELECT nid FROM content_type_activity WHERE field_organization_nid = %d AND field_activity_image_index_value = 1", $oid));
+  drupal_goto('node/'.$nid);
+}
+
+function _organization_aeb_ajax(){	
+	if(isset($_GET['Tid'])){//get the node title and nid
+		$tid = $_GET['Tid'];
+		$tid2 = $_GET['Tid2'];
+		if(!is_numeric($tid)){
+			drupal_json('<option selected value="">无数据</option>');
+			return;
+		}
+		if($tid2){//设置了tid2
+			$sql_nid = "SELECT n.nid,n.title FROM (select * from {term_node} tn group by tn.nid having count(tn.nid)>1 ) tnn inner join {node} n on n.nid = tnn.nid where tnn.tid=%d and n.type = 'orgnization' ";
+			$results = db_query($sql_nid, $tid, $tid2);
+		}
+		else{
+			$sql_nid = "SELECT n.nid,n.title FROM {term_node} tn inner join {node} n on n.nid = tn.nid where tid = %d and n.type = 'orgnization' ";
+			$results = db_query($sql_nid, $tid);
+		}
+	
+		$data = '<option selected value="">请选择</option>';
+		$count = 0;
+		while($row = db_fetch_object($results)){		
+			$data .= '<option value="'.$row -> nid.'">'.$row -> title.'</option>';	
+			$count++;	
+		}
+		if($count > 0){	
+			drupal_json($data);
+		}
+		else{
+			drupal_json('<option selected value="">无数据</option>');
+		}
+	}
+	else if(isset($_GET['nid'])){//get the node data
+		$nid = $_GET['nid'];
+		if(!is_numeric($nid)){
+			drupal_json(0);
+			return;
+		}
+		$node = node_load($_GET['nid']);
+		$return = '<div class="data">
+					 <span>地址：'.$node -> field_address[0]['value'].'</span>
+					 <span>电话：'.$node -> field_phone[0]['value'].'</span>
+				   </div>';
+		drupal_json($return);
+	}
+}
+
+/*
+ * hook_perm
+ */
+function organization_aeb_perm() {
+	return array('access view organizaion');
+}  
+
+/*
+ * hook_nodeapi
+ */
+function organization_aeb_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+	switch($op){
+		case 'delete':
+			if($node -> type == 'grow'){
+				$sql = 'delete from {organization} where gid = %d';
+				db_query($sql, $node -> nid);
+			}			
+			break;
+		case 'insert':
+			if($node -> type == 'grow'){
+				$sql = 'insert into {organization} values( %d, %d)';
+				db_query($sql, $node -> nid, $node -> orgnization);
+				//insert tid
+				$tid = arg(3);
+				$term = taxonomy_get_term($tid);
+				//get parent tid
+				$ptid = taxonomy_get_parents($tid);
+				
+				if(count($ptid)){
+					//$parent = taxonomy_get_term($ptid -> tid);
+					//taxonomy_node_save($node, $parent);					
+					//taxonomy_node_save($node, $term);
+				}
+				else{
+					//taxonomy_node_save($node, $term);
+				}
+			}
+			break;				
+		case 'load':
+			if($node -> type == 'grow'){
+				$sql = 'select nid from {organization} where gid = %d';
+				$result = db_query($sql, $node -> nid);
+				if($data = db_fetch_object($result)){
+					$node -> organization = $data -> nid;
+				}
+			}
+			break;	
+		case 'update':
+			if($node -> type == 'grow'){
+				$sql = 'update {organization} set nid = %d where gid = %d';
+				db_query($sql, $node -> orgnization, $node -> nid);
+			}
+			break;							
+	}  
+
+}
+/*
+ * hook_form_alter
+ */
+function organization_aeb_form_alter(&$form, $form_state, $form_id){
+	
+	//modify the orgnization form
+	if($form_id == 'orgnization_node_form'){	
+		unset($form['taxonomy']['#type']);		
+	}
+	
+	//for the grow experience node form
+	if($form_id == 'grow_node_form'){
+		if(is_numeric(arg(3))){
+			$tid = '<div id="second-tid" tid="'.arg(3).'"></div>';
+		}
+		else{
+			$tid = '<div id="second-tid" tid="0"></div>';
+		}
+		$form['org_container'] = array('#type' => 'markup',
+			'#value' => '<div id="org-container"></div>'.$tid,
+			'#weight' => 48,
+		);	
+		
+	
+		if($form['nid']['#value']){//node edit form
+			$node = node_load($form['#node'] -> organization);		
+			$vote_label = array();
+			foreach($node -> taxonomy as $key => $object){
+				$vote_label = _comment_custom_get_vote_label($key);
+				if($vote_label){
+					$form['field_level1']['#title'] = $vote_label['vote1'];
+					$form['field_level2']['#title'] = $vote_label['vote2'];
+					break;
+				}
+			}
+			$form['orgnization'] = array('#type' => 'select',
+				'#title' => '机构',
+				'#options' => array($node -> nid => $node -> title),
+				'#weight' => 47,
+				'#required' => true,		
+			);
+		}
+		else{//node add form
+			
+			$form['orgnization'] = array('#type' => 'select',
+				'#title' => '机构',
+				'#options' => array(),
+				'#weight' => 47,
+				'#required' => true,		
+			);
+			
+			if($vote_label =  _comment_custom_get_vote_label(arg(3))){
+				$form['field_level1']['#title'] = $vote_label['vote1'];
+				$form['field_level2']['#title'] = $vote_label['vote2'];				
+			}
+			else{
+				$form['field_level1']['#title'] = '医疗水平';
+				$form['field_level2']['#title'] = '设施与环境';	
+			}
+		}
+
+	}
+	
+}
+
+
+function _comment_custom_get_vote_label($tid){
+	$form_values = false;
+	if(is_numeric($tid)){
+		
+		$parent_tid = taxonomy_get_parents($tid);
+		if($parent_tid){
+			foreach($parent_tid as $key => $value){
+				$tid = $key;
+			}
+		}
+		
+		switch($tid){
+			case 117://'产检生育'
+				$form_values['vote1'] = '医疗水平';
+				$form_values['vote2'] = '设施与环境';
+			break;
+			case 151://'生活服务'
+				$form_values['vote1'] = '环境与服务';
+				$form_values['vote2'] = '口味';
+			break;
+			case 144://'幼儿园'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';
+			break;
+			case 148://'早教中心'
+				$form_values['vote1'] = '课程质量';
+				$form_values['vote2'] = '设施与环境';
+			break;
+			case 134://'少儿培训'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';
+			break;
+			case 131://'家政服务'
+				$form_values['vote1'] = '保姆质量';
+				$form_values['vote2'] = '公司管理';
+			break;
+			case 132://'小学'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';
+			break;
+			case 121://'儿科指南'
+				$form_values['vote1'] = '设施与环境';
+				$form_values['vote2'] = '教师水平';
+			break;							
+		}
+
+		return $form_values;
+	}
+	else{
+		return false;
+	}
+}
+
+function _get_camp_start_nid($onid){
+}

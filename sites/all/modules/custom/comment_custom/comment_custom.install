@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Implementation of hook_install()
+ */
+function comment_custom_install() {
+	drupal_install_schema('comment_custom');
+	db_query("UPDATE {system} SET weight = 200 WHERE name = 'comment_custom'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function comment_custom_uninstall() {
+	drupal_uninstall_schema('comment_custom');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function comment_custom_schema() {
+  $schema['comment_custom'] = array(
+    'description' => 'The other date for comment.',
+    'fields' => array(
+      'cid' => array(        
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false),
+      'vote1' => array(        
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,),
+      'vote2' => array(        
+       'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,),
+      'vote3' => array(        
+       'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,),
+      'money' => array(
+        'type' => 'float',
+        'unsigned' => TRUE,
+        'not null' => false,
+        ),
+      'other' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        ),
+      'labels' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        ),      
+      ),
+    'primary key' => array('cid'),
+    );  
+
+  return $schema;
+}
+

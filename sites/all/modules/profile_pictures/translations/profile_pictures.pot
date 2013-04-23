@@ -1,0 +1,142 @@
+# $Id: profile_pictures.pot,v 1.3 2010/05/17 09:17:46 yeputons Exp $
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-17 11:49+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: profile_pictures.info:2
+msgid "Profile pictures"
+msgstr ""
+
+#: profile_pictures.info:3
+msgid "Add image field to a core profile's categories"
+msgstr ""
+
+#: profile_pictures.admin.inc:20
+msgid "edit %title"
+msgstr ""
+
+#: profile_pictures.admin.inc:34
+msgid "add new %type"
+msgstr ""
+
+#: profile_pictures.admin.inc:47
+msgid "Image properties"
+msgstr ""
+
+#: profile_pictures.admin.inc:50
+msgid "Maximum size of uploaded image (in KiB, zero if none)"
+msgstr ""
+
+#: profile_pictures.admin.inc:58
+msgid "Maximum dimensions of uploaded image (WxH, in pixels)"
+msgstr ""
+
+#: profile_pictures.admin.inc:67
+msgid "--- No postprocessing ---"
+msgstr ""
+
+#: profile_pictures.admin.inc:77 views/profile_pictures_field.inc:66
+msgid "ImageCache preset"
+msgstr ""
+
+#: profile_pictures.admin.inc:89 profile_pictures.admin.inc:109
+msgid "File saving path"
+msgstr ""
+
+#: profile_pictures.admin.inc:95
+msgid "Available tokens"
+msgstr ""
+
+#: profile_pictures.admin.inc:112
+msgid "You can change this path at !url"
+msgstr ""
+
+#: profile_pictures.admin.inc:113
+msgid "User settings page"
+msgstr ""
+
+#: profile_pictures.admin.inc:138
+msgid "Please, enter an non-negative number"
+msgstr ""
+
+#: profile_pictures.admin.inc:147
+msgid "Please, input dimensions in format WxH"
+msgstr ""
+
+#: profile_pictures.module:32
+msgid "picture"
+msgstr ""
+
+#: profile_pictures.module:62
+msgid "Upload"
+msgstr ""
+
+#: profile_pictures.module:82
+msgid "Delete"
+msgstr ""
+
+#: profile_pictures.module:151
+msgid "Failed to upload the picture for %type"
+msgstr ""
+
+#: profile_pictures.module:226
+msgid "File name"
+msgstr ""
+
+#: profile_pictures.module:227
+msgid "File extension"
+msgstr ""
+
+#: profile_pictures.module:228
+msgid "Field name"
+msgstr ""
+
+#: profile_pictures.theme.inc:10
+msgid "Token"
+msgstr ""
+
+#: profile_pictures.theme.inc:10
+msgid "Replacement value"
+msgstr ""
+
+#: profile_pictures.theme.inc:13
+msgid "tokens"
+msgstr ""
+
+#: views/profile_pictures_field.inc:35
+msgid "Maximum height (0 for no limit)"
+msgstr ""
+
+#: views/profile_pictures_field.inc:40
+msgid "Maximum width (0 for no limit)"
+msgstr ""
+
+#: views/profile_pictures_field.inc:56
+msgid "--- Use maximum dimensions settings ---"
+msgstr ""
+
+#: views/profile_pictures_field.inc:69
+msgid "Please, use only imagecache preset or maximum dimensions settings"
+msgstr ""
+
+#: views/profile_pictures_field.inc:77
+msgid "Maximum height must be a non-negative integer"
+msgstr ""
+
+#: views/profile_pictures_field.inc:81
+msgid "Maximum width must be non-negative integer"
+msgstr ""

@@ -1,0 +1,12 @@
+; $Id: user_visits.info,v 1.2 2008/07/18 15:45:43 sanduhrs Exp $
+name         = User Visits
+description  = "Shows who has visited a user's profile lately."
+core = 6.x
+; dependencies = module1 module2 module3
+; package      = "Your arbitrary grouping string"
+; Information added by drupal.org packaging script on 2009-04-24
+version = "6.x-1.4"
+core = "6.x"
+project = "user_visits"
+datestamp = "1240572679"
+

@@ -1,0 +1,100 @@
+<?php
+/* $Id: node_form_template.module,v 1.1.2.2 2009/04/27 19:09:06 effulgentsia Exp $ */
+
+/**
+ * @file
+ * Changes the node_form themehook from using a function to using a template, 
+ * providing greater control to module and theme developers.
+ */
+
+/**
+ * Implementation of hook_theme().
+ */
+function node_form_template_theme($aExisting) {
+  return array(
+    // This needs to run after node.module's hook_theme(), which we ensure
+    // by setting this module's weight to 1 during install.
+    'node_form' => array(
+      'template' => 'node-form',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ */
+function node_form_template_theme_registry_alter(&$aThemeRegistry) {
+  $aThemeRegistry['node_form']['preprocess functions'][] = 'node_form_template_latepreprocess_node_form';
+}
+
+/**
+ * Preprocess function to remove node-form as a template suggestion for the node hook.
+ * @see http://drupal.org/node/360135.
+ */
+function node_form_template_preprocess_node(&$aVars) {
+  if (in_array('node-form', $aVars['template_files'])) {
+    $aVars['template_files'] = array_diff($aVars['template_files'], array('node-form'));
+  }
+}
+
+/**
+ * Preprocess function to run ahead of other modules.
+ */
+function template_preprocess_node_form(&$aVars) {
+  // Add some potentially useful variables for the template to have access to.
+  $aVars['node'] = $aVars['form']['#node'];
+  $aVars['type'] = $aVars['form']['#node']->type;
+  
+  // Render each child element, storing the rendered result in a template variable.
+  // Unless it's a special element, also put a reference to it in the
+  // $form['#rendered_content_children'] variable.
+  $aSpecialElementKeys = array('author', 'options', 'buttons', 'form_id', 'form_build_id', 'form_token');
+  if (!is_array($aVars['form']['#rendered_content_children'])) {
+    $aVars['form']['#rendered_content_children'] = array();
+  }
+  foreach (element_children($aVars['form']) as $sKey) {
+    // Call drupal_render on a copy of the child element, to allow future 
+    // preprocess functions to re-render, if they so desire.
+    $aChildElementCopy = $aVars['form'][$sKey];
+    $sRenderedContent = drupal_render($aChildElementCopy);
+    if (!isset($aVars[$sKey])) {
+      $aVars[$sKey] =& $sRenderedContent;
+    }
+    if (!in_array($sKey, $aSpecialElementKeys)) {
+      $aVars['form']['#rendered_content_children'][$sKey] =& $sRenderedContent;
+    }
+    unset($sRenderedContent);
+  }
+  
+  // Create a special variable $form_ids that combines the hidden fields needed
+  // for form submission to work.
+  $aVars['form_ids'] = $aVars['form_id'] . $aVars['form_build_id'] . $aVars['form_token'];
+  
+  // Allow type-specific template overrides.
+  if ($aVars['type']) {
+    $aVars['template_files'][] = 'node-form-' . $aVars['type'];
+  }
+}
+
+/**
+ * Preprocess function to run after all other modules.
+ */
+function node_form_template_latepreprocess_node_form(&$aVars) {
+  // Create a special variable, "admin", that combines author and options
+  // in a way that's backward's compatible with theme_node_form().
+  unset($aVars['admin']);
+  if (isset($aVars['author']) || isset($aVars['options'])) {
+    if (isset($aVars['author'])) {
+      $sAuthor = '<div class="authored">' . $aVars['author'] . '</div>';
+    }
+    if (isset($aVars['options'])) {
+      $sOptions = '<div class="options">' . $aVars['options'] . '</div>';
+    }
+    $aVars['admin'] = '<div class="admin">' . $sAuthor . $sOptions . '</div>';
+  }
+  
+  // Create a special variable, "standard", that combines form_ids and
+  // the non-special elements of the form.
+  unset($aVars['standard']);
+  $aVars['standard'] = $aVars['form_ids'] . implode('', $aVars['form']['#rendered_content_children']);
+}

@@ -1,0 +1,98 @@
+body.virtue{background:url("../images/pinknew/bg.jpg") repeat scroll 0 0 transparent;}
+body.virtue .logo {background: url("../images/pinknew/logo.jpg") no-repeat scroll 0 0 transparent;}
+body.virtue .cloud {background: url("../images/pinknew/cloud.jpg")  no-repeat scroll 0 0 transparent;}
+body.virtue .cloud2 {background: url("../images/pinknew/cloud2.jpg")  no-repeat scroll 0 0 transparent;}
+body.virtue .searchtext {background: url("../images/pinknew/searchbox.jpg")  no-repeat scroll 0 0 transparent;}
+body.virtue .searchBtn{background: url("../images/pinknew/searchbtn.jpg")  no-repeat scroll 0 0 transparent;}
+body.virtue .main{height:auto;}
+body.virtue .content{height:auto;background-color: white;}
+body.virtue .footer .footlogo {background: url("../images/pinknew/footerlogo.jpg") repeat scroll 0 0 transparent;}
+.row{width:1002px; margin: 0 auto; overflow:hidden; background:#FFF;}
+.left{ float:left;}
+.right{ float:right;}
+#banner{background: url("../images/pinknew/banner.jpg")  no-repeat scroll 0 0 transparent;width:1002px;height:290px;margin:1px 0 0 1px;}
+
+.content-inner{border:1px dashed #d6d6d6;border-width:1px 0 0;}
+
+#location{ height:45px; line-height:45px; font-family:Microsoft YaHei; color:#b9b9b9;font-size:12px; border-bottom:1px dashed #d3d3d3;}
+#location p{ padding:0 30px;}
+#location a{ color:#7a7a7a; font-size:12px;}
+#location a:hover{ color:#fd96c0;}
+
+#content .left{width:710px; margin-left:22px; *margin-left:10px;}
+#content .right{ float:right; width:227px; padding-right:24px;}
+
+.ningjiangtai ul li{ width:167px; height:200px; background:url(../images/common/chenzhan.gif) 0 -61px; float:left; margin-left:10px; *margin-left:8px; }
+.ningjiangtai ul li dt{width:167px; text-align:center; padding-top:18px;}
+.ningjiangtai ul li dd{ text-align:center; font-size:12px; font-family:Microsoft YaHei; color:#7a7a7a; line-height:36px;}
+
+#content .box{width:694px; overflow:hidden; padding-left:10px; padding-top:10px; *margin-left:4px;}
+#content .box_top{height:12px; overflow:hidden; background:url(../images/common/chenzhan.gif) -1px -268px;}
+#content .box_content{overflow:hidden; border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc;}
+#content .box_bottom{height:12px; overflow:hidden; background:url(../images/common/chenzhan.gif) -1px -287px;}
+
+#content #list{width:692px; overflow:hidden;}
+#list dl{ width:655px; overflow:hidden; margin:0 auto; border-bottom:1px dashed #e6e6e6; padding:5px 0;}
+#list dl dt{font-family: arial,Microsoft YaHei; font-size:12px;}
+#list dl dt p { line-height:24px; color:#7a7a7a;}
+#list dl dt p .title{color:blue;}
+#list dl dt p a{ color:#fe9bc3;}
+#list dl dd{width:655px; overflow:hidden; height:24px; line-height:24px;}
+
+#list dl dd .date{ color:#b9b9b9; float:left; font-size:12px; font-family:Arial, Helvetica, sans-serif;}
+#list dl dd .button{ float:right;}
+#list dl dd .button a{ float:left; width:35px; height:21px; background:#CCC; font-size:12px; color:#FFF; padding-left:20px; margin: 0 2px; background:url(../images/common/chenzhan.gif) 0 -302px no-repeat;}
+
+#list dl dd .button a.comment{ background-position:0 -302px;}
+#list dl dd .button a.vud-link-up{ background-position:-57px -302px;}
+#list dl dd .button a.comment:hover{ background-position:0 -325px;}
+#list dl dd .button a.vud-link-up:hover{ background-position:-57px -325px;}
+
+.pagebox{ height:35px; margin:10px 0; margin-bottom:40px;}
+.pagebox p{ float:right;}
+.pagebox p a{ float:left; width:32px; height:32px; line-height:32px; text-align:center; margin:0 2px; font-family:Arial, Helvetica, sans-serif; font-size:16px;}
+.pagebox p a.prev{ background:url(../images/common/chenzhan.gif) 0 -355px;}
+.pagebox p a.prev:hover{ background-position: -32px -355px;}
+.pagebox p a.next{ background:url(../images/common/chenzhan.gif) 0 -387px;}
+.pagebox p a.next:hover{ background-position: -32px -387px;}
+.pagebox p .pager a{ background:url(../images/common/chenzhan.gif) 0 -418px; font-size:14px; font-weight:bold; color:#FFF;}
+.pagebox p .pager a:hover{background-position: -32px -418px;}
+.pagebox p .pager a.current{background-position: -32px -418px;}
+
+.lucknumber{ width:226px; height:87px; background:url(../images/common/chenzhan.gif) 0 -460px; margin-top:25px; line-height:87px;}
+.lucknumber p{ float:right; width:85px; text-align:center;}
+.lucknumber a{ font-size:36px; color:#FFF; font-family:"Times New Roman", Times, serif;}
+
+.jiangping_box{ background:url(../images/common/chenzhan.gif) -1px -552px; width:226px; height:185px; margin-top:10px;}
+.jiangping_box .th{width:190px; height:40px; background:url(../images/common/chenzhan.gif) right -552px; margin-left:-7px; position:relative; top:10px;}
+.jiangping_box .jiangping{ text-align:center; padding:2px; }
+.calendar-top{background:url(../images/grow/calendartop.jpg);width:231px;height:77px;margin-top:15px;}
+.calendar{width:226px;height:170px; background:url(../images/common/chenzhan.gif) 0 -750px; margin-top:5px;}
+
+.form{width:226px; margin-top:8px;}
+.form #edit-content-wrapper{height:107px; background:url(../images/common/chenzhan.gif) 0 -925px; padding:15px 10px; overflow:hidden;}
+.form #edit-content-wrapper textarea{width:206px; height:117px; border:none; background:none; overflow-y:auto; font-family: arial,Microsoft YaHei; color:#666;}
+
+.form .button{ padding:5px 0;}
+.form .button .pic{ float:left; height:24px; line-height:24px; font-size:12px; font-family: arial,Microsoft YaHei; color:#666; margin-top:5px;}
+.form .button .pic span{ float:left; height:24px; width:26px; background:url(../images/common/chenzhan.gif) 0 -1071px; margin-right:5px;}
+
+#-cc-custom-virtue-form  .form-submit{cursor:pointer;margin:5px 2px;border:none;float:right; width:148px; height:34px; background:url(../images/common/chenzhan.gif) 0 -1105px;}
+#-cc-custom-virtue-form  .form-submit.hover{ background:url(../images/common/chenzhan.gif) 0 -1146px;}
+
+.button .vud-widget{float:left;width:70px;}
+.button .alternate-votes-display{float:right;color:#FE9BC3;}
+.button .comcount{float:left;width:15px;text-align:center;color:#FE9BC3;}
+
+
+.calendar .DynarchCalendar-bottomBar{display:none;}
+.calendar .DynarchCalendar,.calendar .DynarchCalendar-topBar{background-color:white;border:none;}
+.calendar table.DynarchCalendar-titleCont{left:45px;left:0px\9;}
+.calendar .DynarchCalendar-dayNames div,
+.calendar .DynarchCalendar-day{padding:1px 5px;}
+.calendar #cont{padding:10px 0 0 8px;}
+
+#content .left .virtueth{height:58px;background:url(../images/grow/virtue-top.jpg);margin:10px 0;width:709px;}
+#-cc-custom-virtue-form{position:relative;padding-bottom:20px;}
+#thumbnails{margin:10px 0 0 0;}
+

@@ -1,0 +1,12 @@
+; $Id: profile_checkboxes.info,v 1.1 2009/09/07 03:03:30 bacteriaman Exp $
+name = Profile Checkboxes
+description = Replace list selection options with checkboxes
+dependencies[] = profile
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-09-18
+version = "6.x-1.1"
+core = "6.x"
+project = "profile_checkboxes"
+datestamp = "1253246736"
+

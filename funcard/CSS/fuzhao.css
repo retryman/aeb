@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.login_form{ width:970px; margin: 0 auto;}
+.form_item{ height:46px; line-height:46px;overflow:hidden;font-size:12px; color:#737373; float:left;}
+.form_item span{ float:left; }
+.form_item span.tit{ width:60px; text-align:right; padding-right:10px;}
+.form_item label{ float:left;}
+.form_item label.text{ padding-top:7px;}
+.form_item label.text input{ float:left; height:17px; padding:8px 5px; border:none; background:url(images/input_text2.gif) no-repeat;}
+
+.form_item .button_submit{ width:89px; height:32px; background:url(images/huzhao.gif) 0 -38px; border:none; cursor:pointer; margin-top:7px; margin-left:10px;}
+
+.form_item .button_reg{ float:left; width:89px; height:32px; background:url(images/huzhao.gif) 0 -70px; margin-top:7px; margin-left:5px;}
+.form_item .but_activate{ float:left; width:140px; height:32px; background:url(images/huzhao.gif) 0 -102px; margin-top:7px; margin-left:5px;}
+
+
+.tags_box{ font-size:12px; font-family:Arial,"宋体"}
+.tags_box .tags{ height:39px; line-height:38px; overflow:hidden; background:url(images/tags_bg.gif) center bottom no-repeat; padding-left:115px;}
+.tags_box .tags a{ float:left; height:38px; font-size:14px; font-family:"微软雅黑", "宋体"; color:#737373; margin: 0 4px; padding-right:20px; background:url(images/huzhao.gif) right -139px; font-weight:bold;}
+.tags_box .tags a span{ float:left; height:38px; line-height:38px; padding-left:20px; cursor:pointer; background:url(images/huzhao.gif) left -139px;}
+
+.tags_box .tags a.current,.tags_box .tags a:hover{background:url(images/huzhao.gif) right -181px; color:#FFF;}
+.tags_box .tags a.current span,.tags_box .tags a:hover span{background:url(images/huzhao.gif) left -181px;}
+
+#gift{ width:700px; margin: 0 auto;}
+#gift ul{ padding: 20px 0;}
+#gift ul li{width:164px; height:287px; float:left; border:1px solid #ffdeab; margin:2px; overflow:hidden;}
+#gift ul li.hover{ background:#fffcf0; border-color:#FBC997;}
+#gift ul li img{display:block; width:144px; height:144px; margin: 10px auto;}
+#gift ul li span{display:block; text-align:center; height:24px; line-height:24px; color:#737373;}
+#gift ul li a.duihuan{display:block; width:128px; height:33px; margin: 5px auto; background:url(images/jifen.gif);}
+#gift ul li a.duihuan:hover{ background:url(images/jifen.gif) -127px 0;}
+
+#gift ul li.hover a.duihuan{background:url(images/jifen.gif) -267px 0;}
+#gift ul li.hover a.duihuan:hover{background:url(images/jifen.gif) -394px 0;}
+
+.tags1{width:720px; margin: 0 auto; padding:20px 0;}
+
+.tags2{width:720px; margin: 0 auto; padding:20px 0;}
+
+.tags3{width:720px; margin: 0 auto;}
+.tags3 p{margin: 8px 0; line-height:24px; color:#737373;}

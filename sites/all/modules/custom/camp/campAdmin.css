@@ -1,0 +1,23 @@
+#camp-admin-homepage-fourcolomn input.form-text{
+	width:400px;
+}
+#camp-admin-homepage-fourcolomn .camp_views input.form-text{
+	width:80px;
+}
+#camp-admin-homepage-fourcolomn .form-item{
+	float:left;
+	width:400px;
+	margin-right:20px;
+}
+#camp-admin-homepage-fourcolomn .camp_views .form-item{
+	width:80px;
+}
+#camp-admin-homepage-fourcolomn #edit-title1-wrapper,
+#camp-admin-homepage-fourcolomn #edit-title2-wrapper,
+#camp-admin-homepage-fourcolomn #edit-title3-wrapper,
+#camp-admin-homepage-fourcolomn #edit-title4-wrapper{
+	width:100%;
+}
+#camp-admin-homepage-fourcolomn #edit-submit{
+	margin-left:450px;
+}

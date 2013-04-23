@@ -1,0 +1,9 @@
+<?php
+
+
+/**
+ * Implementation of hook_install()
+ */
+function camp_install() {
+  db_query("UPDATE {system} SET weight = 201 WHERE name = 'camp'");
+}

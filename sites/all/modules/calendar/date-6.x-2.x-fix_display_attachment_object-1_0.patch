@@ -1,0 +1,28 @@
+diff -r -u date.orig/includes/date_plugin_display_attachment.inc date/includes/date_plugin_display_attachment.inc
+--- date.orig/includes/date_plugin_display_attachment.inc	2009-09-16 16:08:39 -0500
++++ date/includes/date_plugin_display_attachment.inc	2009-09-16 16:10:40 -0500
+@@ -21,14 +21,16 @@
+ 
+   function options(&$display) {
+     parent::options($display);
+-    $display->display_options['style_plugin'] = 'date_nav';
+-    $display->display_options['items_per_page'] = 0;
+-    $display->display_options['row_plugin'] = '';
+-    //$display->display_options['defaults']['style_plugin'] = FALSE;
+-    $display->display_options['defaults']['style_options'] = FALSE;
+-    $display->display_options['defaults']['items_per_page'] = FALSE;
+-    $display->display_options['defaults']['row_plugin'] = FALSE;
+-    $display->display_options['defaults']['row_options'] = FALSE;
++    if (is_object($display)){
++      $display->display_options['style_plugin'] = 'date_nav';
++      $display->display_options['items_per_page'] = 0;
++      $display->display_options['row_plugin'] = '';
++      //$display->display_options['defaults']['style_plugin'] = FALSE;
++      $display->display_options['defaults']['style_options'] = FALSE;
++      $display->display_options['defaults']['items_per_page'] = FALSE;
++      $display->display_options['defaults']['row_plugin'] = FALSE;
++      $display->display_options['defaults']['row_options'] = FALSE;
++    }
+   } 
+ }
+ 

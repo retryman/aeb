@@ -1,0 +1,12 @@
+name = Node Limit Role
+description = Allows admins to apply a Node Limit to a role
+package = Access control
+dependencies[] = node_limit
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-04-15
+version = "6.x-0.3"
+core = "6.x"
+project = "node_limit"
+datestamp = "1239834708"
+

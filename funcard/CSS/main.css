@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p{margin:0; padding:0;}
+ul,ol,li{list-style:none;}
+img{border:none;}
+a{text-decoration:none;}
+
+body{ background: #d8f6ff;}
+
+.row{width:982px; background:url(images/row_bg.gif) repeat-y; margin: 0 auto; padding: 0 4px; overflow:hidden;}
+
+.left{ float:left;}
+.right{ float:right;}
+
+ .clr{clear:both;} 
+
+
+#header{height:120px; background:url(images/header_bg.gif); padding-top:20px; border-bottom:4px solid #f8cd7b;}
+#header .logo{float:left; padding-left:30px; width:213px; height:90px;}
+#header .ad{ float:left; height:80px; width:380px; padding-left:20px; padding-top:10px;}
+#header .search{float:right; width:320px; height:90px;}
+#header .search p.sign{ text-align:right; padding-bottom:20px; padding-right:20px;}
+#header .search p.sign a{ font-size:12px; color:#ffc537; margin:  10px;}
+
+#header .search p.form{}
+#header .search p.form label{ float:left;}
+#header .search p.form label.text{width:186px; height:25px; overflow:hidden; background:url(images/top_search.gif); padding-left:12px; padding-top:8px;}
+#header .search p.form label.text input{ border:none; background:none; width:175px;}
+#header .search p.form label.submit {width:85px; overflow:hidden;}
+#header .search p.form label.submit input{width:85px; height:31px; border:none; background:url(images/top_search.gif) -200px 0;}
+
+
+.box{width:971px; overflow:hidden; margin: 10px auto;}
+.box .box_top{height:26px; overflow:hidden; background:url(images/box.gif);}
+.box .box_mid{ border-left:1px solid #ffda9c; border-right:1px solid #ffda9c; overflow:hidden; width:969px;}
+.box .box_bottom{height:26px; overflow:hidden; background:url(images/box.gif) right bottom;}
+
+.location{ font-size:12px; color:#737373; padding: 0 20px; height:30px;}
+.location a{ color:#737373;}
+.location a.current{ color:#ff9204;}
+
+
+#footer{width:964px; height:78px; background:url(images/footer_bg.png); margin: 0 auto; margin-bottom:10px; padding-top:20px;}
+#footer p{ height:30px; line-height:30px; text-align:center; font-size:12px;}
+#footer p.copyright{ font-family:Arial, "宋体";}
+#footer p a{ color:#333;}
+#footer p a:hover{ color:#C60;}

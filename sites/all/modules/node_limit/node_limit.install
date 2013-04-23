@@ -1,0 +1,68 @@
+<?php
+// $Id: node_limit.install,v 1.1.2.3 2009/04/11 19:00:18 davedelong Exp $
+
+/**
+ * @file
+ * Installation functions for module node_limit.
+ */
+
+define("NODE_LIMIT_NO_LIMIT", -1);
+
+/**
+ * Implementation of hook_install().
+ */
+function node_limit_install() {
+  drupal_install_schema('node_limit');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function node_limit_schema() {
+  $schema['node_limit'] = array(
+    'description' => t('The base Node Limit table'),
+    'fields' => array(
+      'lid' => array(
+        'description' => t('The limit id'),
+        'type' => 'int',
+        'not null' => TRUE
+      ),
+      'type' => array(
+        'description' => t('The {node}.type to which this limit applies'),
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'limit' => array(
+        'description' => t('The node limit for this limit'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => NODE_LIMIT_NO_LIMIT
+      ),
+      'title' => array(
+        'description' => t('The display name for this limit'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'weight' => array(
+        'description' => t('The weight of this limit'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('lid')
+  );
+  return $schema;
+}
+
+
+/*
+ * Implementation of hook_uninstall().
+ */
+function node_limit_uninstall() {
+  drupal_uninstall_schema('node_limit');
+}

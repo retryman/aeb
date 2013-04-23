@@ -1,0 +1,51 @@
+<?php
+// $Id: node_limit_interval.install,v 1.1.2.1 2009/04/11 19:00:20 davedelong Exp $
+
+/**
+ * @file
+ * Installation functions for module node_limit_interval.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function node_limit_interval_install() {
+  drupal_install_schema('node_limit_interval');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function node_limit_interval_schema() {
+  $schema['node_limit_interval'] = array(
+    'description' => t('The table for applying node limits to a time interval'),
+    'fields' => array(
+      'lid' => array(
+        'description' => t('The {node_limit}.lid'),
+        'type' => 'int',
+        'not null' => TRUE
+      ),
+      'interval' => array(
+        'description' => t('The interval for this limit'),
+        'type' => 'int',
+        'not null' => TRUE
+      ),
+      'unit' => array(
+        'description' => t('The unit for the interval'),
+        'type' => 'int',
+        'not null' => TRUE
+      )
+    ),
+    'primary key' => array('lid')
+  );
+
+  return $schema;
+}
+
+
+/*
+ * Implementation of hook_uninstall().
+ */
+function node_limit_interval_uninstall() {
+  drupal_uninstall_schema('node_limit_interval');
+}

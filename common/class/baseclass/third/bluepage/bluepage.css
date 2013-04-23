@@ -1,0 +1,27 @@
+.BPbar {
+	margin: 1px 0px; clear: both; float:right;
+}
+.BPbar a {
+	float: left; padding: 2px 4px; font-size: 12px; text-decoration: none;
+}
+.BPinput {
+	border: 1px solid #ccc; padding: 0px; width:40px; height:18px !important; margin: 0px; background: #F5FBFF;
+}
+.BPtotal {
+    background-color: #F5FBFF; border: 1px solid #426AA2; font-weight: bold; margin: 0px 1px;
+}
+.BPnum {
+	background-color: #FFFFFF; border: 1px solid #DBDBDB; margin-right:1px; vertical-align: middle;
+}
+a:hover.BPnum  {
+	background-color: #F5FBFF; border: 1px solid #426AA2; text-decoration: none;
+}
+.BPside {
+	background-color: #FFFFFF; border: 1px solid #DBDBDB; margin-right:1px; font-size: 12px !important; font-size: 13px;
+}
+a:hover.BPside {
+	background-color: #F5FBFF; border: 1px solid #426AA2; text-decoration: none;
+}
+.BPcur {
+	margin-right:1px; border: 1px solid #DBDBDB; vertical-align: middle; background-color: #EAEAEA; color: #000000; font-weight: bold;
+}

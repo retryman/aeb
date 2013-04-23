@@ -1,0 +1,1820 @@
+<?php
+/*
+ * hook_menu
+ */
+function content_custom_menu(){
+  $items = array();
+  $items['admin/user/sendsms'] = array(
+    'title'            => '发送短信',
+    'page callback'    => 'drupal_get_form',
+  	'page arguments' => array('_admin_sendsms_form'),
+    'access arguments' => array('send sms'),
+    'type'             => MENU_LOCAL_TASK,
+  	'file' => 'content_custom.admin.inc',
+  );
+  $items['node/poll/%/%'] = array(
+ 	  'access callback' => TRUE,
+	  'page callback' => '_content_custom_node_poll',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+   $items['admin/content/passport'] = array(
+  	  'title' => '护照网站',
+ 	  'access arguments' => array('passport'),
+      'type' => MENU_NORMAL_ITEM,
+  	  'file' => 'content_custom.passport.inc',
+	  'page callback' => '_content_custom_pp_present_list'
+  );   
+  $items['admin/content/passport/present/list'] = array(
+  	  'title' => '护照网站积分兑换礼品',
+ 	  'access arguments' => array('passport'),
+      'type' => MENU_NORMAL_ITEM,
+  	  'file' => 'content_custom.passport.inc',
+	  'page callback' => '_content_custom_pp_present_list'
+  );  
+  $items['admin/content/passport/present/add'] = array(
+  	  'title' => '护照网站积分兑换礼品添加',
+ 	  'access arguments' => array('passport'),
+	  'page callback' => 'drupal_get_form',
+  	  'page arguments' => array('_content_custom_pp_present_add_form'),
+      'type' => MENU_NORMAL_ITEM,
+  	  'file' => 'content_custom.passport.inc',
+  );
+  $items['admin/content/passport/present/%/edit'] = array(
+      'title' => '护照网站积分兑换礼品编辑',
+ 	  'access arguments' => array('passport'),
+	  'page callback' => 'drupal_get_form',
+  	  'page arguments' => array('_content_custom_pp_present_add_form'),
+      'type' => MENU_NORMAL_ITEM,
+  	  'file' => 'content_custom.passport.inc',
+  );
+  $items['register/success/%'] = array(
+ 	  'access callback' => TRUE,
+	  'page callback' => '_content_custom_register_success',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+  $items['virtue01'] = array(
+ 	  'access callback' => TRUE,
+      'title' => '活动注册',
+	  'page callback' => 'drupal_get_form',
+  	  'page arguments' => array('_cc_custom_register_form'),
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+   $items['virtue02'] = array(
+ 	 'access callback' => TRUE,
+     'title' => '活动注册2',
+     'page callback' => 'drupal_get_form',
+  	 'page arguments' => array('_cc_custom_register_form_2'),
+     'type' => MENU_CALLBACK,
+  	 'file' => 'content_custom.pages.inc',
+  );
+  $items['denglish'] = array(
+ 	  'access callback' => TRUE,
+      'title' => '快乐学习, 轻松返校',
+	  'page callback' => 'drupal_get_form',
+  	  'page arguments' => array('_cc_custom_disney_form'),
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );          
+  $items['user/cover/me'] = array(
+  	  'access callback' => true,	  
+	  'page callback' => '_content_custom_user_cover_me',	  
+      'type' => MENU_CALLBACK,
+      'file' => 'content_custom.pages.inc',
+   );
+  $items['admin/user/userpoints/export'] = array(
+    'title'            => '导出积分',
+    'page callback'    => '_userpoints_admin_points_export',
+    'access arguments' => array(USERPOINTS_PERM_VIEW),
+    'type'             => MENU_LOCAL_TASK,
+  	'file' => 'content_custom.admin.inc',
+  );
+  $items['admin/content/export'] = array(
+    'title'            => '导出内容',
+    'position' => 'left',
+    'access arguments' => array('access statistics'),
+  	'page callback' => 'system_admin_menu_block_page',    
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system')
+  );
+  $items['admin/content/export/daily_virtue'] = array(
+    'title'            => '导出成长记录',
+    'page callback'    => '_cc_admin_dailyvirtue_export',
+    'access arguments' => array('access statistics'),
+  	'file' => 'content_custom.admin.inc',
+  );
+  $items['admin/reports/errors'] = array(
+    'title'            => '错误报告',
+    'page callback'    => '_content_custom_reports_errors',
+    'access arguments' => array('access statistics'),  	
+    'type'             => MENU_NORMAL_ITEM,
+  	'file' => 'content_custom.admin.inc',
+  );
+   $items['report/error/delete/%'] = array(
+    'title'            => '错误报告',
+    'page callback'    => '_content_custom_reports_errors_delete',
+  	'access arguments' => array('access statistics'),
+    'type'             => MENU_NORMAL_ITEM,
+   'file' => 'content_custom.admin.inc',
+  );
+   $items['admin/user/userpromote'] = array(
+    'title'            => '用户推荐设置',
+    'description'       => '设置推荐的用户',
+    'page callback'     => 'drupal_get_form',
+    'page arguments'    => array('userpromote_set'),
+  	'access arguments' => array('access statistics'),
+    'type'             => MENU_NORMAL_ITEM,
+   'file' => 'content_custom.admin.inc',
+  );
+  $items['admin/content/comment/orgnization'] = array(
+    'title'            => '用户评论统计',
+    'page callback'     => '_content_custom_comments_statistic',
+  	'access arguments' => array('access statistics'),
+    'type'             => MENU_LOCAL_TASK,
+    'file' => 'content_custom.admin.inc',
+  );  
+  $items['start'] = array(
+  		'access callback' => true,
+	  'page callback' => '_content_custom_startpage',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+  $items['notices'] = array(
+  	  'access callback' => true,
+	  'page callback' => '_content_custom_notices',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+  $items['virtue'] = array(
+  	  'access callback' => true,
+	  'page callback' => '_content_custom_virtue',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+  $items['ajax/getcouponmsg'] = array(
+  	  'access callback' => true,
+	  'page callback' => '_content_custom_ajax_getcouponmsg',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   ); 
+
+  $items['swfupload/upload'] = array(
+  	  'access callback' => true,
+	  'page callback' => '_content_custom_ajax_upload',
+      'type' => MENU_CALLBACK,
+  	  'file' => 'content_custom.pages.inc',
+   );
+  return $items;
+}
+
+
+/*
+ * hook_user
+ */
+function content_custom_user($op, &$edit, &$account, $category = NULL){
+	if($op == 'load'){		
+		$points = userpoints_get_current_points($account->uid);       
+        $relationships_count = user_relationships_load(array('user' => $account -> uid, 'approved' => 1), array('count' =>true));
+        
+        $account -> points = $points;
+        $account -> friends_count = $relationships_count;
+        $account -> level = _content_custom_user_level($points);
+        
+        //if the user not upload the picture, add the default one
+        if(!$account -> picture){
+        	if($picture = variable_get('user_pic_'.$account -> uid, '')){
+        		$account -> picture_default = $picture;        		
+        	}
+        	else{
+	        	$num = rand(1,3);
+	        	$picture = 'sites/all/themes/zen/zen-internals/images/special/default-user-pic'.$num.'.png';
+	        	$account -> picture_default = $picture;
+	        	variable_set('user_pic_'.$account -> uid, $picture);	        	
+        	}
+        }
+	}
+}
+
+/**
+ * hook_menu_alter
+ * @param $items
+ * @return unknown_type
+ */
+function content_custom_menu_alter(&$items) {
+   $items['user/%user_uid_optional']['page callback'] = '_content_custom_user_redirect_profilepage';
+}
+
+function _content_custom_user_redirect_profilepage(){
+	drupal_goto('user/'.arg(1).'/cover');
+}
+
+/*
+ * hook_nodeapi
+ */
+function content_custom_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) { 
+	global $user; 
+	
+	switch($op){
+		case 'presave':
+			if($node -> type == 'daily_virtue'){
+				//get aeb virtue nid
+				$nid = _cc_get_aeb_virtue_nid();
+				$node -> field_aeb_virtue[0]['nid'] = $nid;
+				
+			}
+			break;
+		case 'view':			
+			if($node -> type == 'orgnization'){	
+				$node -> content['body']['#value'] = '<div class="field body">
+												        <div class="field-label">简介:&nbsp;</div>
+												        <div class="field-items">
+												            '.$node -> content['body']['#value'].'
+												        </div>
+												      </div>';	
+				
+			}			
+
+		$breadcrumb[] = l('首页', '');
+		switch($node -> type){
+			case 'orgnization':
+				$breadcrumb[] = l('帮友点评', 'orgnization/comment');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);	
+				break;
+			case 'experience':
+			case 'argument':
+			case 'files':		
+				$breadcrumb[] = l('经验分享', 'experience');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);				
+				break;
+			case 'question':
+			case 'userpoll':
+				$breadcrumb[] = l('你问我答', 'questions');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);				
+				break;
+			case  'notice':
+				$breadcrumb[] = l('活动公告', 'notices');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);				
+				break;
+			case  'node_gallery_gallery':			
+			case  'member_camp':				
+				$breadcrumb[] = l('爱儿帮探营', 'camp');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);				
+				break;
+			case 'aeb_virtue':
+			case 'present':	
+				$breadcrumb[] = l('儿童成长记录', 'virtue');
+				$title = str_replace('爱儿帮每日美德','儿童成长记录',$node->title);
+				$breadcrumb[] = l($title , 'node/'.$node -> nid);						
+			    drupal_set_breadcrumb($breadcrumb);				
+				break;
+			case 'resource':
+				$breadcrumb[] = l('收藏资源共享', 'files/list');
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);					
+				drupal_set_breadcrumb($breadcrumb);
+				break;
+			case 'coupon':
+				$breadcrumb[] = '<a class="active" href="/funcard/coupon.php">育儿优惠</a>';
+				$breadcrumb[] = l( $node->title, 'node/'.$node -> nid);					
+				drupal_set_breadcrumb($breadcrumb);
+				break;	
+		}		
+		
+			break;
+		case 'load':			
+			//匿名用户跳到登陆页(显示node)
+			/*
+			if(!$user -> uid && arg(0) == 'node'){
+				if($node -> type == 'node_gallery_gallery'){
+				}
+				else if(in_array($node -> type, array('orgnization', 'notice', 'sitecontent', 'node_gallery_image', 'aeb_virtue', 'daily_virtue'))){
+				
+				}
+				else{
+					
+					drupal_goto('user/login','destination='.urlencode($_GET['q']));					
+				}
+			}
+			*/			
+			break;	
+		case 'prepare':
+			//匿名用户跳到登陆页(创建和编辑node)
+			if(!$user -> uid && arg(0) == 'node' && !in_array($node -> type, array('apply_org', 'apply_mem', 'survey'))){		
+				drupal_goto('user/login','destination='.urlencode($_GET['q']));	
+			}
+			
+			$breadcrumb[] = l('首页', '');
+			switch($node -> type){
+				case  'node_gallery_gallery':				
+				case  'member_camp':				
+					$breadcrumb[] = l('爱儿帮探营', 'camp');
+				break;	
+			}
+			drupal_set_breadcrumb($breadcrumb);
+			break;
+		case 'insert':
+			if($node -> type == 'survey'){
+				
+//				$birth = $node -> birthday;
+//				$birth = explode(' ', $birth); 
+//				$birth = explode('-', $birth[0]); 
+//				$account['profile_cbirthday'] = array('year' => $birth[0], 'month' => (int)$birth[1], 'day' => (int)$birth[2] );
+//				
+//				//$account['profile_address'] = $node -> address;
+//				$account['profile_cname'] = $node -> cname;
+//				$account['profile_name'] = $node -> pname;
+//				$account['profile_mobile_phone'] = $node -> phone;
+//
+//				global $user;
+//				if(!$user -> uid)break;
+//				db_query("delete from {users_roles} where uid = %d and rid = %d", $user -> uid, 6);
+//				db_query("insert into {users_roles} values(%d, %d)", $user -> uid, 6);
+//				profile_save_profile($account, $user, '个人专访');
+
+				drupal_set_message("提交成功，谢谢您的参与！");
+				if(arg(0) == 'denglish'){
+					drupal_goto('denglish');
+				}
+				else{
+					drupal_goto('survey');
+				}
+			}
+			break;					
+	}
+
+	if($node -> type == 'question'){
+		_content_custom_question_oper($node, $op);
+	}
+	
+}
+
+/**
+ * do some operation for the question node type
+ */
+function _content_custom_question_oper(&$node, $op){
+	switch($op){
+		case 'validate':							
+			if($node -> field_reward_type[0]['value'] == 2 && !$node -> field_question_expert[0]['uid']){					
+				form_set_error('field_question_expert', '请选择专家');
+			}
+		break;
+		case 'presave':
+			if($node -> field_reward_type[0]['value'] == 2 && $node -> field_question_expert[0]['uid']){
+				
+				if(!$node -> nid){//node add action
+					$node -> field_question_expert_rec[0]['value'] = $node -> field_question_expert[0]['uid'];
+				}
+				else if($node -> nid && $node -> field_question_expert_rec[0]['value'] != $node -> field_question_expert[0]['uid']){
+					//node edit action
+					global $user;					
+					$recipients = array(user_load($node -> field_question_expert[0]['uid']));
+					$title = "用户". $user -> name ."向你提了一个问题";
+					$body = "用户". $user -> name ."向你提了一个问题<br/>
+							要查看详细情况请点击：".l('这里','node/'.$node -> nid);
+					privatemsg_new_thread($recipients, $title, $body);
+					
+					$node -> field_question_expert_rec[0]['value'] = $node -> field_question_expert[0]['uid'];
+					
+				}
+
+			}			
+			break;
+		case 'insert':
+			//if selected a expert,give the expert a message
+			if($node -> field_reward_type[0]['value'] == 2 && is_numeric($node -> field_question_expert[0]['uid'])){
+				global $user;					
+				$recipients = array(user_load($node -> field_question_expert[0]['uid']));
+				$title = "用户".$user -> name ."向你提了一个问题";
+				$body = "用户".$user -> name ."向你提了一个问题<br/>
+						要查看详细情况请点击：".l('这里','node/'.$node -> nid);
+				privatemsg_new_thread($recipients, $title, $body);
+			}
+			break;	
+	}
+}
+
+
+/**
+ * 获取爱儿帮每日美德nid
+ * @return unknown_type
+ */
+function _cc_get_aeb_virtue_nid(){
+	$sql = "select n.nid from node n inner join content_type_aeb_virtue ctdv on ctdv.nid = n.nid 
+			where n.type = 'aeb_virtue' and ctdv.field_virtue_date_value < ".time()." 
+			order by ctdv.field_virtue_date_value desc limit 0,1;";
+	$result = db_query($sql);
+	if($row = db_fetch_object($result)){
+		return $row -> nid;
+	}
+}
+
+
+/*
+ * hook_form_alter
+ */
+function content_custom_form_alter(&$form, $form_state, $form_id){
+	//for the register form
+	if($form_id == 'user_register'){		
+		unset($form['captcha']['#description']);
+	}
+
+	//for search form
+	if($form_id == 'search_theme_form'){		
+		$form['submit']['#value'] = '';
+		$form['search_theme_form']['#default_value'] = '站内搜索';
+	}
+	
+	//for orgnization_node_form form
+	if($form_id == 'orgnization_node_form'){		
+		$form['buttons']['submit']['#value'] = '';
+	}
+	
+	// for user_login_block
+	if($form_id == 'user_login_block'){		
+		$form['links']['#value'] = '<div class="item-list">
+										<ul>
+											<li class="first">'.l('','user/register').'</li>
+											<li class="last">'.l('找回密码','user/password').'</li>
+										</ul>
+									</div>';
+		}
+
+    //for user profile form
+	if($form_id == 'user_profile_form'){
+		$form['timezone']['#attributes'] = array('class' => 'timezone');
+		$form['mimemail']['#attributes'] = array('class' => 'mimemail');
+	}
+	
+	
+	//for polluser block node form
+	if($form_id == 'polluser_node_form' && arg(0) == 'questions'){		
+		$form['buttons']['submit']['#value'] = '';
+	}
+	
+	//for polluser block node form
+	if($form_id == 'search_form' && arg(0) == 'grows'){		
+		//dpm($form);
+		$form['basic']['#title'] = '会员经历直通车';
+		$form['basic']['inline']['keys']['#default_value'] = '用户名';
+	}
+	
+	//for experience home page poll form
+	if($form_id == 'poll_view_voting' && arg(0) == 'experience'){		
+		//dpm($form);
+		$form['vote']['#value']='';
+	}
+	
+	//for the menu_edit_item form
+	if($form_id == 'menu_edit_item'){
+		
+		$form['menu']['link_path']['#size'] = 120;
+		$form['menu']['link_path']['#maxlength'] = 350;		
+			
+		$form_submit_temp[] = '_content_custom_clear_hotwords_cache';
+		foreach($form['#submit'] as $item){
+			$form_submit_temp[] = $item;
+		}
+		$form['#submit'] = $form_submit_temp;
+
+	}
+
+	if($form_id == 'menu_overview_form'){
+		if(in_array($form['#menu']['menu_name'], array('menu-hot-search', 'menu-hotarea', 'menu-hot-taxonomy'))){			
+			
+			$form_submit_temp[] = '_content_custom_clear_hotwords_cache';
+			foreach($form['#submit'] as $item){
+				$form_submit_temp[] = $item;
+			}
+			$form['#submit'] = $form_submit_temp;
+		}		
+	}
+	
+	if('survey_node_form' == $form_id){	
+
+		global $user;
+		
+
+		$form['buttons']['submit']['#value'] = '提交';
+		$form['text'] = array(
+		'#weight' => 0,
+		'#value' => '<div class="survey-des"><strong>想让孩子和外教一起过个独特的万圣节吗？来迪士尼英语万圣节特别体验课，感受西方文化，学说地道英语！免费名额有限，即可填写下面调查问卷报名参加！<br/>
+		友情提示：参加体验课更可获得<span style="color:blue;">珍藏版迪士尼英语学习身高尺</span>哦！</strong></div>',
+		);
+
+		$form['field_survey_eng']['#weight'] = 25;	
+		$form['field_survey_touch']['#weight'] = 27;	
+		$form['field_survey_study']['#weight'] = 29;	
+		$form['field_survey_disney']['#weight'] = 31;	
+		$form['field_survey_hear']['#weight'] = 33;	
+		$form['field_survey_distance']['#weight'] = 35;	
+
+		$form['6text'] = array(
+		'#weight' => 36,
+		'#value' => '<div class="clear"></div>
+						<div class="userinfo">
+						<div class="des7">6.请准确填写以下信息，更有爱儿帮神秘礼品赠送！</div>
+						',
+		);
+		
+		$form['end6text'] = array(
+		'#weight' => 43,
+		'#value' => '<div class="clear"></div></div>',
+		);
+
+	}
+	
+}
+
+function _content_custom_clear_hotwords_cache(){	
+	cache_clear_all('homepage_hotwords', 'cache');
+	cache_clear_all('_content_custom_comment_navigation', 'cache');
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function content_custom_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op) {  	
+  	case 'list':	  		
+	    $blocks[0] = array(
+	      'info' => t('User links'),
+	    );
+	    $blocks[1] = array(
+	      'info' => t('Hot search'),
+	    );
+	    $blocks[2] = array(
+	      'info' => t('Baby bill'),
+	    );
+	    $blocks[3] = array(
+	      'info' => t('News room'),
+	    );
+	    $blocks[4] = array(
+	      'info' => t('Four pictures'),
+	    );
+	    $blocks[5] = array(
+	      'info' => t('我的爱儿帮你问我答链接'),
+	    );
+	    $blocks[6] = array(
+	      'info' => '活动规则',
+	    );
+	    $blocks[7] = array(
+	      'info' => '我的回答',
+	      'cache' => BLOCK_NO_CACHE,	    
+	    );
+	    $blocks[8] = array(
+	      'info' => '网站banner',
+	    );
+	    $blocks[9] = array(
+	      'info' => t('Baby information'),
+	    );
+	    $blocks[11] = array(
+	      'info' => t('Map bus'),
+	    );
+	    $blocks[12] = array(
+	      'info' => t('User info'),	    	
+	    );
+	    $blocks[13] = array(
+	      'info' => t('Comment navigation'),
+	    );
+	    $blocks[17] = array(
+	      'info' => '我的每日美德-小红花',
+	    );
+	    $blocks[18] = array(
+	      'info' => '首页滚动用户图片',
+	    );
+	    $blocks[19] = array(
+	      'info' => '每日美德首页滚动获奖用户图片',
+	    );
+	    $blocks[20] = array(
+	      'info' => '每日美德页获奖用户图片',
+	    );
+	    $blocks[21] = array(
+	      'info' => '待选辩论话题投票请',
+	    );   	        		    		    
+	    return $blocks;
+    
+   case 'view':  	
+	   
+	    switch ($delta) {
+	      case 0: 	
+	        $block = array(	                   
+	          'content' => _content_custom_block_user_link(),
+	          );
+	        break;
+	      case 1:	        
+	        $block = array(	          
+	          'content' => _content_custom_hot_search(),
+	          );
+	        break;
+	      case 2:	        
+	        $block = array(	          
+	          'content' => _content_custom_baby_bill(),
+	          );
+	        break;
+	      case 3:	        
+	        $block = array(	          
+	          'content' => _content_custom_news_room(),
+	          );
+	        break;
+	      case 4:	        
+	        $block = array(	          
+	          'content' => _content_custom_four_pictures(),
+	          );
+	        break;
+	      case 5:	        
+	        $block = array(
+	          'subject' => t('我的爱儿帮你问我答链接'),
+	          'content' => _content_custom_myquestions_link(),
+	          );
+	        break;	        
+	      case 6:	        
+	        $block = array(	          
+	          'content' => _content_custom_activity_rules(),
+	          );
+	        break;
+	      case 7:	       
+	        $block = array(	          
+	          'content' => _content_custom_my_comments('question'),
+	          );
+	        break;
+	      case 8:	       
+	        $block = array(	          
+	          'content' => _content_custom_top_banner(),
+	          );
+	        break;
+	      case 9:	       
+	        $block = array(	         
+	          'content' => _content_custom_baby_info(),
+	          );
+	        break;
+	      case 11:	       
+	        $block = array(	          
+	          'content' => _content_custom_map_bus(),
+	          );
+	        break; 
+	      case 12:	       
+	        $block = array(	         
+	          'content' => _content_custom_user_info(),
+	          );
+	        break;
+	     case 13:	       
+	        $block = array(	          
+	          'content' => _content_custom_comment_navigation(),
+	          );
+	        break;
+	     case 17:	       
+	        $block = array(	          
+	          'content' => _content_custom_flower(),
+	          );
+	        break;
+	     case 18:	       
+	        $block = array(
+	          'subject' => '首页滚动图片',
+	          'content' => _content_custom_scroll_user(),
+	          );
+	        break;
+	     case 19:	       
+	        $block = array(	         
+	          'content' => _content_custom_virtue_scroll_user(),
+	          );
+	        break;
+	     case 20:	       
+	        $block = array(	          
+	          'content' => _content_custom_virtue_user(),
+	          );
+	        break;
+	     case 21:	       
+	        $block = array(	          
+	          'content' => _content_custom_poll_subject(),
+	          );
+	        break;		        	         	          	                    		        		        		        	    		        		        	        		                	        		        	 	        	 	        	 	        	        
+    }
+    return $block;
+  }
+}
+
+function _content_custom_poll_subject(){
+	
+	$sql = "select nid from node where type='poll' order by created desc limit 0,1";
+	$nid = db_fetch_object(db_query($sql));
+	
+	$node = '';
+	if(!$nid -> nid){
+		return '';
+	}
+	$node = node_load($nid -> nid);
+
+	$choice = '';
+	global $user;
+	foreach($node -> choice as $item){
+		if($user -> uid){
+			$url = '/node/poll/'.$nid -> nid.'/'.$item['chorder'];
+		}
+		else{
+			$url = 'user?destination=experience';
+		}
+		$choice .= '<div>
+		<span class="vote" ><a href="'.$url.'">投票</a></span>
+		<span class="count">'.$item['chvotes'].'票</span>'.$item['chtext'].'</div>'; 
+	}
+	
+	return '<div class="node-type-poll">
+				<div style="margin:0;">'.$node -> field_poll_des[0]['value'].'</div>
+				'.$choice.'	
+				<a href="" class="addsub"></a>
+				'.drupal_get_form('_content_custom_poll_subject_form').'
+			</div>';
+}
+
+function _content_custom_poll_subject_form(){
+	$form = array();
+	$form['subject'] = array(
+	'#type' => 'textfield',
+	'#required' => true,
+	'#size' => 40,
+	'#title' => '辩论话题'
+	);
+	$form['button'] = array(
+	'#type' => 'submit',
+	'#value' => '',
+	);
+	return $form;
+}
+
+function _content_custom_poll_subject_form_submit(&$form, $form_states){
+	$receivers[] = user_load(5);//aeb
+	$receivers[] = user_load(75);//aeb_new
+	
+	global $user;
+	
+	if($user -> uid){
+		$content = '用户'.$user -> name .'推荐辩论话题:'.strip_tags($form_states['values']['subject']);
+		$options['author'] = $user;
+	}
+	else{
+		$content = '匿名用户推荐辩论话题:'.strip_tags($form_states['values']['subject']);
+		$options['author'] = $receivers[0];
+	}
+	privatemsg_new_thread($receivers, '用户推荐辩论话题', $content, $options);
+	drupal_set_message('提交成功，感谢参与！');
+}
+
+
+//美德页获奖用户
+function _content_custom_virtue_user(){
+	if($cache = cache_get('cache_virtue_user_block')){
+		//return $cache -> data;
+	}
+	
+	//获取首页显示的用户
+	$uids = variable_get('virtue_user', '');
+	$uids = explode(',', $uids);
+	
+	$count = 1;
+	$output = '<ul>';
+	foreach($uids as $uid){
+		if(!is_numeric($uid)){
+			continue;
+		}
+		
+		$user = user_load($uid);
+		//dpm($user);
+		$imagePath = $user -> picture?$user -> picture:$user -> picture_default;
+		$awardTitle = '';
+		if($user -> profile_virtue_award){
+			$awardTitle_arr = explode('|', $user -> profile_virtue_award);
+			$awardTitle = $awardTitle_arr[0];
+		}
+
+		$output .= '<li><dt><a href="/user/'.$user -> uid.'/cover">
+					 '.theme('imagecache', 'award_user_125_60', $imagePath).'
+					 </a></dt><dd><a href="/user/'.$user -> uid.'/cover">'.$awardTitle.'</a></dd>
+	            </li>';
+
+
+	}
+	
+	$output .= '</ul>';
+
+	cache_set('cache_virtue_user_block', $output);
+	return $output;
+}
+
+//每日美德首页滚动图片
+function _content_custom_virtue_scroll_user(){
+		//加载js和css
+	drupal_add_js(drupal_get_path('module', 'content_custom').'/scroll.js');
+	drupal_add_css(drupal_get_path('module', 'content_custom').'/scroll.css');
+	
+	if($cache = cache_get('cache_homevirtue_user_block')){
+		return $cache -> data;
+	}
+	
+	//获取首页显示的用户	
+	$uids = variable_get('homevirtue_user', '');
+	$uids = explode(',', $uids);
+	if(count($uids) <= 0){
+		return '';
+	} 
+	$items = '';
+
+	foreach($uids as $uid){
+		$member = user_load($uid);
+		if($member){
+			$picture = $member -> picture?$member -> picture:$member -> picture_default;
+			$image = theme('imagecache', 'home_block_top', $picture); 
+			$items .= '<li class="user-item">
+		                <a>'.$image.'</a>
+		                <ul class="user-info">
+							<li>会员：'.l($member -> name, 'user/'.$uid).'</li>
+							<li><span class="user-level">会员等级:'.$member -> level.'级</span></li>
+							<li>会员积分:'.$member -> points.'</li>
+							<li class="last">会员好友:'.$member -> friends_count.'人</li>
+						  </ul>  
+			  			</li>';
+		}
+	}
+
+
+	//输出html
+	$output = '<div class="award-user">
+					<div class="banner"><div class="title"></div><a class="award-cup" href="/virtue/awarders"></a></div>
+					<div class="infiniteCarousel-out">
+					  <div class="infiniteCarousel">					  
+				       <div class="wrapper">
+				        <ul class="users">
+						'.$items.'
+				        </ul>
+				       </div>         
+					  </div>
+				    </div>
+			    </div>';
+	cache_set('cache_homevirtue_user_block', $output);
+	return $output;
+}
+
+function _content_custom_myquestions_link(){
+	return l('', 'node/add/question');
+}
+
+//首页滚动图片
+function _content_custom_scroll_user(){
+	//加载js和css
+	drupal_add_js(drupal_get_path('module', 'content_custom').'/scroll.js');
+	drupal_add_css(drupal_get_path('module', 'content_custom').'/scroll.css');
+	
+	if($cache = cache_get('cache_homepage_user_block')){
+		return $cache -> data;
+	}
+	
+	//获取首页显示的用户	
+	$uids = variable_get('homepage_user', '');
+	$uids = explode(',', $uids);
+	if(count($uids) <= 0){
+		return '';
+	} 
+	$items = '';
+
+	foreach($uids as $uid){
+		$member = user_load($uid);
+		if($member){
+			$picture = $member -> picture?$member -> picture:$member -> picture_default;
+			$image = theme('imagecache', 'home_block_top', $picture); 
+			$items .= '<li class="user-item">
+		                <a>'.$image.'</a>
+		                <ul class="user-info">
+							<li>会员：'.l($member -> name, 'user/'.$uid).'</li>
+							<li><span class="user-level">会员等级:'.$member -> level.'级</span></li>
+							<li>会员积分:'.$member -> points.'</li>
+							<li class="last">会员好友:'.$member -> friends_count.'人</li>
+						  </ul>  
+			  			</li>';
+		}
+	}
+
+
+	//输出html
+	$output = '<div class="infiniteCarousel">
+		      <div class="wrapper">
+		        <ul class="users">
+				'.$items.'
+		        </ul>        
+		      </div>
+		    </div>';
+	cache_set('cache_homepage_user_block', $output);
+	return $output;
+}
+
+//我的每日美德-小红花
+function _content_custom_flower(){
+	global $user;
+	$out = '';
+	$uid = '';
+	
+	if(arg(0) == 'user' && is_numeric(arg(1))){
+		$uid = arg(1);
+	}
+	else{
+		$uid = $user -> uid;
+	}
+	
+	$sql = "select count(*) as count from {node} where type = 'daily_virtue' and uid = %d";
+	$result = db_query($sql, $uid);
+	$count = db_fetch_object($result);
+	
+	if($count -> count == 0){
+		$class = is_numeric(arg(1))?'':'no-flowers';//only show the no flower image in the user cover page
+	}
+	else if($count->count > 0 && $count->count <= 10){
+		$class = 'flowers' . $count->count;
+	} 
+	else if($count->count > 10){
+		$class = 'more-flowers';
+		$all_count = '<div class="all-count"> X ' . $count->count . '</div>';
+	}
+	
+	$virtueLink = '';
+	if(arg(0) == 'node'){
+		$virtueLink = "<br/>".l('爱儿帮每日美德活动','virtue');
+	}
+	
+	$out = '<div class="'.$class.'"></div>'.$all_count.$virtueLink;
+	return $out;
+}
+
+function _content_custom_my_comments($node_type){
+	global $user;
+	$output = '';
+	
+	if(!$user -> uid){
+		return '';
+	}
+	
+	$sql = "SELECT node.nid, comments.comment, comments.cid, comments.timestamp
+			FROM node node
+			LEFT JOIN comments comments ON node.nid = comments.nid
+			WHERE node.status = 1 AND node.type = '%s' AND comments.uid =%d 
+			ORDER BY timestamp DESC";
+	$sql_count = "SELECT count(node.nid)
+			FROM node node
+			LEFT JOIN comments comments ON node.nid = comments.nid
+			WHERE node.status = 1 AND node.type = '%s' AND comments.uid =%d ";
+	
+	$results = pager_query($sql, 8, 1, $sql_count, $node_type, $user -> uid);
+	$output .= '<div class="view-content">';
+	$count = 0;
+	while($row = db_fetch_object($results)){
+		$comment = trim(strip_tags($row-> comment));
+		if(mb_strlen($comment) > 25){	
+			$comment = mb_substr($comment, 0, 25).'...';
+		}
+		else{
+			$comment = $comment;	
+		}
+		$output .= '<div class = "row">';
+		
+		$output .= '<div class="comment-title">'.l($comment, 'node/'.$row -> nid, array('query' => '#comment-'.$row -> cid)).'</div>';
+		
+		$output .= '<div class="edit-comment">'.l(t('edit'), 'comment/edit/'.$row -> cid).'</div>';
+		
+		$output .= '<div class="delete-comment">'.l(t('delete'), 'comment/delete/'.$row -> cid).'</div>';
+		
+		$output .= '</div>';//end row
+		$count++;
+	}
+	$output .= theme('pager', '', 8, 1);
+	$output .= '<div class="clear"></div>
+				</div>';//end view-content
+	if(!$count){
+		return '';
+	}
+	return $output;
+}
+
+//在用户封面页面添加一些链接
+function _content_custom_block_user_link(){	
+	global $user;
+	$links = array();
+	$output = '';
+	if(!$user -> uid){//don't show the block for the anonymouse user
+		return '';
+	}
+	if(arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'cover'){//this block only show in the user cover page  	
+
+
+		
+	    $links[] = l("加为好友", "relationship/".arg(1)."/request/1", array(
+																	      'query' => drupal_get_destination(),
+																	      'html'  => TRUE,
+																	      'attributes' => array('class' => 'user_relationships_popup_link'),
+																	    ));
+																	    
+		if(function_exists('flag_get_flags')){
+			$flags = flag_get_flags('user');
+			foreach($flags as $item){
+				if($item -> name == 'follow'){
+					$flag = $item;
+				}
+			}
+		    $links[] = $flag->theme($flag->is_flagged(arg(1)) ? 'unflag' : 'flag', arg(1));
+		}
+
+	   if (variable_get('fivestarextra_enable_user', FALSE)) {
+	        
+	        if ($user->uid == arg(1)) {
+	            //If the user is viewing their own page, return a static form so they cannot vote
+	            $links[] = fivestar_static('user', $user->uid);	         
+	        }
+	        else {
+	            //If it is not their own profile page, return the normal fivestar widget
+	            $links[] = drupal_get_form('fivestarextra_form_user_'. arg(1), 'user', arg(1));	         
+	        }
+        }
+        
+		if(arg(1) == $user -> uid){
+			unset($links[0]);
+			unset($links[1]);
+			$links[0] = $links[2];
+			unset($links[2]);
+		}        
+
+		$output = '<ul>
+		<li>'.$links[0].'</li>
+		<li>'.$links[1].'</li>
+		<li>'.$links[2].'</li>
+		</ul>';	
+	}
+			
+	return $output;	
+}
+
+function _content_custom_activity_rules(){
+	$items = array('<span class="num">1</span><span class="text">每个会员只能投票一次。</span>',  
+					'<span class="num">2</span><span class="text">简单灌水的回复不受欢迎，请表明你的观点。</span>', 
+					'<span class="num">3</span><span class="text">请不要发布攻击政府、政策，及一切反动言论。</span>', 
+					'<span class="num">4</span><span class="text">必须遵守爱儿帮俱乐部管理总则。</span>');
+	return '<div class="activity-rules">'.theme('item_list', $items).'</div><div class="clear"></div>';
+}
+
+function _content_custom_comment_navigation(){
+	
+	drupal_add_js(drupal_get_path('module', 'content_custom').'/jquery.fancybox-1.3.1.js');
+	drupal_add_css(drupal_get_path('module', 'content_custom').'/jquery.fancybox-1.3.1.css');
+	drupal_add_js("$(document).ready( function() {		
+					$('#all-taxonomy-link').fancybox({
+						'titlePosition'		: 'inside',
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none'
+					});	
+					$('#all-area-link').fancybox({
+						'titlePosition'		: 'inside',
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none'
+					});
+					});","inline");
+	$cache = cache_get('_content_custom_comment_navigation');
+	if($cache){
+		return $cache -> data;
+	}
+	
+	$output = _content_custom_comment_navigation_taxonomy();
+
+	$output .= _content_custom_comment_navigation_area();
+	
+	$output .= _content_custom_comment_navigation_search();
+
+	cache_set('_content_custom_comment_navigation', $output);				
+	
+	return $output;
+}
+
+//get hot search data
+function _content_custom_comment_navigation_search(){
+	
+	$hotsearchs = menu_tree_page_data('menu-hot-search');
+    $count = 1;
+    $hotsearch = '<div>';
+	foreach($hotsearchs as $item){
+		$hotsearch .= l($item['link']['title'], $item['link']['link_path']);
+		if($count % 7 === 0){
+			$hotsearch .= '</div><div>';
+		}
+		$count++;
+	}
+	$hotsearch .= '</div>';
+	$output = '<div class="hot-search">
+				   <h3>热门搜索</h3>
+					'.$hotsearch.'
+			   </div>
+			   <div class="clear"></div>';
+	return $output;
+}
+
+//get the hot taxonomy area
+function _content_custom_comment_navigation_taxonomy(){
+	//get all orgnization taxonomy
+	$trees = taxonomy_get_tree(20);
+	$trees_output = '<div style="display:none;"><div id="all-taxonomy">';
+	$count = 0;
+	foreach($trees as $tree){
+		$trees_output .= l($tree -> name, 'orgnizations/search/'.$tree -> tid);
+		$count++;
+		if(($count%4) < 1){
+			$trees_output .= '<div class="line"></div>';
+		}
+		
+	}	
+	$trees_output .= '</div></div>';
+	
+	//get hot taxonomy data
+	$hottaxonomies = menu_tree_page_data('menu-hot-taxonomy');
+	foreach($hottaxonomies as $item){		
+		$taxonomy_arr[] = l($item['link']['title'], $item['link']['link_path']);
+	}
+	$taxonomy_arr[] = '<a href="#all-taxonomy" id="all-taxonomy-link">全部分类</a>';
+	$count = 1;
+	$taxonomies = '<div>';
+	foreach($taxonomy_arr as $item){
+		$taxonomies .= $item;
+		if($count % 7 === 0){
+			$taxonomies .= '</div><div>';
+		}
+		$count++;
+	}
+	$taxonomies .= '</div>';
+	
+	$output = '<div class="hot-taxonomy">
+				   <h3>热门分类</h3>	
+				   '.$taxonomies.$trees_output.'
+			   </div>';
+	return $output;
+}
+
+//get all areas data
+function _content_custom_comment_navigation_area(){
+	
+	$areas = taxonomy_get_children(194);	
+	$areas_output = '<div style="display:none;"><div id="all-area">';
+	$count = 0;
+	foreach($areas as $tree){
+		$area = taxonomy_get_children($tree -> tid);
+		foreach($area as $item){
+			$areas_output .= l($item -> name, 'orgnizations/search/'.$item -> tid);
+			$count++;
+			if(($count%4) < 1){
+				$areas_output .= '<div class="line"></div>';
+			}
+		}
+	}	
+	$areas_output .= '</div></div>';
+	
+	//get hot area data
+	$hotareas = menu_tree_page_data('menu-hotarea');	
+	foreach($hotareas as $item){		
+		$areas_arr[] = l($item['link']['title'], $item['link']['link_path']);
+	}
+	$areas_arr[] = '<a href="#all-area" id="all-area-link">全部地区</a>';
+	$count = 1;
+	$areas = '<div>';
+	foreach($areas_arr as $item){
+		$areas .= $item;
+		if($count % 7 === 0){
+			$areas .= '</div><div>';
+		}
+		$count++;
+	}
+	$areas .= '</div>';
+	
+	$output = '<div class="hot-area">
+			   	   <h3>热门地区</h3>
+				   '.$areas.$areas_output.'
+			   </div>';
+	return $output;
+}
+
+function _content_custom_map_bus(){
+	global $nodetype;
+	$address = '';
+	if(arg(0) == 'node' && is_numeric(arg(1)) && $nodetype == 'orgnization'){
+		$sql = "select cfa.field_address_value from {content_type_orgnization} cto
+				inner join {content_field_address} cfa on cfa.nid = cto.nid where cto.nid = %d";
+		$result = db_fetch_object(db_query($sql, arg(1)));
+		$address = $result -> field_address_value;
+	}
+	else{
+		return '';
+	}
+	$output = '<div id="icenter" name="icenter"  style="z-index:1;height:200px;width:209px"></div>';		
+	$output .= '<script src="http://maps.google.com/maps/api/js?sensor=false&language=zh" type="text/javascript"></script>';
+	$output .= '<script type="text/javascript">
+					function initialize() {
+					     geocoder = new google.maps.Geocoder(); 
+						 var myLatlng = new google.maps.LatLng(39.9,116.4);
+						 var myOptions = {
+							 zoom: 12,
+							 center: myLatlng,
+							 mapTypeId: google.maps.MapTypeId.ROADMAP
+						 }
+						 var map = new google.maps.Map(document.getElementById("icenter"), myOptions);						
+						 geocoder.geocode( { "address": "'.$address.'"}, function(results, status) {
+							 if (status == google.maps.GeocoderStatus.OK) {
+								 map.setCenter(results[0].geometry.location);
+								 var marker = new google.maps.Marker({
+									 map: map,
+									 position: results[0].geometry.location
+								 });
+							 } else {
+							 	map.setCenter(31.251,121.4838);
+							 }
+	 					 }); 
+ 				  	 }	
+					 initialize(); 
+				</script>';
+			
+
+	return $output;
+}
+
+function _content_custom_user_info(){
+   global $user;
+   $content = '';
+   if ($user->uid) {
+   	
+       	$content = '<ul>
+				<li>'.$user->name.'，您好！</li>
+				<li><span class="user-level">会员等级:</span><span class="userlevel'.$user -> level.'"></span></li>
+				<li>我的积分是:'.$user -> points.'</li>
+				<li class="last">我的好友:'.$user -> friends_count.'人</li>
+			  </ul>';
+       	
+   }
+   return $content;
+}
+
+/**
+ * get the level of the user
+ * 
+ * @param $points the user points
+ * 
+ * @return int user level
+ */
+function _content_custom_user_level($points){
+	$level = 0;
+	if(0 < $points && $points <= 100){
+		$level = 1;
+	}
+	else if(100 < $points && $points  <= 300){
+		$level = 2;
+	}
+	else if(300 < $points && $points  <= 600){
+		$level = 3;
+	}
+	else if(600 < $points){
+		$level = 4;
+	}
+	return $level;
+}
+
+/**
+ * get the node type from node id
+ * 
+ * @param $nid
+ * nid
+ * 
+ * @return 
+ * node type
+ */
+function _content_custom_get_node_type($nid){
+	$sql = 'select type from {node} where nid = %d';
+	$result = db_query($sql, $nid);
+	while($data = db_fetch_object($result)){
+		return $data -> type;
+	}
+	return false;
+}
+
+function _content_custom_baby_info(){
+	$user = '';
+	if(arg(0) == 'user' && is_numeric(arg(1))){
+		$user = user_load(arg(1));
+		if(function_exists('profile_load_profile')){
+			profile_load_profile($user); 
+		}
+	}
+	else{
+		return '';
+	}
+	
+	$percent = _content_custom_check_user_update($user);
+	
+	if($percent >= 100){
+		$class = 'percent10';
+	}
+	else if($percent >= 90 && $percent < 100){
+		$class = 'percent9';
+	}
+	else if($percent >= 80 && $percent < 90){
+		$class = 'percent8';
+	}
+	else if($percent >= 70 && $percent < 80){
+		$class = 'percent7';
+	}
+	else if($percent >= 60 && $percent < 70){
+		$class = 'percent6';
+	}
+	else if($percent >= 50 && $percent < 60){
+		$class = 'percent5';
+	}
+	else if($percent >= 40 && $percent < 50){
+		$class = 'percent4';
+	}
+	else if($percent >= 30 && $percent < 40){
+		$class = 'percent3';
+	}
+	else if($percent >= 20 && $percent < 30){
+		$class = 'percent2';
+	}
+	else if($percent >= 10 && $percent < 20){
+		$class = 'percent1';
+	}
+	else if($percent >= 0 && $percent < 10){
+		$class = 'percent1';
+	}
+		
+
+	$output = '<div class="baby-detail">
+				<ul>
+				<li class="border">会员名：'.$user -> name.'</li>
+				<li class="border">宝宝姓名：'.$user -> profile_cname.'</li>
+				<li class="border">宝宝性别：'.$user -> profile_csex.'</li>
+				<li class="border">宝宝年龄：'._content_custom_baby_info_age($user -> profile_cbirthday).'</li>
+				<li class="'.$class.'"></li>
+				<li class="percent">'.$percent.'%</li>
+				<li class="text">我的个人专辑更新程度</li>
+			  </ul>
+			  </div>
+			  <div class="clear"></div>';
+	return $output;
+}
+
+/**
+ * check the percent of the user update
+ * @return unknown_type
+ */
+function _content_custom_check_user_update(&$user){
+	$percent = 0;
+	//专辑封面10
+	if($user -> profile_picture){
+		$percent = 10;
+	}
+	
+	//个人专辑基本资料5
+	$percent += 5;
+	
+	//个人专访5
+	$percent += 5;
+	
+	//我的成长体验每个5，最高40
+	$count = _content_custom_check_user_update_type_count($user -> uid, 'grow');
+	if($count >= 8){
+		$percent += 40;
+	}
+	else if(0 < $count && $count < 8 ){
+		$percent += $count*5;
+	}
+	//我的育儿经验每个5，最高20
+	$count = _content_custom_check_user_update_type_count($user -> uid, 'experience');
+	if($count >= 4){
+		$percent += 20;
+	}
+	else if( 0 < $count && $count < 4 ){
+		$percent += $count*5;
+	}
+	
+	//我的资源推荐每个5，最高20
+	$count = _content_custom_check_user_update_type_count($user -> uid, 'resource');
+	if($count >= 4){
+		$percent += 20;
+	}
+	else if( 0 < $count && $count < 4){
+		$percent += $count*5;
+	}
+	
+	return $percent;
+}
+
+function _content_custom_check_user_update_type_count($uid, $nodetype){
+	$sql = "select count(*) as count from {node} where uid = %d and type = '%s'";
+	$result = db_query($sql, $uid, $nodetype);
+	if($row = db_fetch_object($result)){
+		return $row -> count;
+	}
+	else{
+		return 0;
+	}
+	
+}
+
+
+function _content_custom_baby_info_age($birthday){
+	if(!$birthday){
+		return '';
+	}
+	
+	$year = $birthday['year'];
+	$month = $birthday['month'];
+	
+	$today = getdate();
+	
+	if($today['year'] < $year){
+		return '';
+	}
+	
+	if($today['year'] == $year && $today['mon'] < $month){
+		return '';
+	}
+	
+	$all_month = ($today['year'] - $year)*12 + ($today['mon'] - $month);//the count of all the month of the baby age
+	
+	if(!$all_month){
+		return '未满一个月';
+	}
+	
+	if($all_month < 12){
+		return $all_month.'个月';
+	}
+	
+	$year = (int)($all_month/12);
+	$month = $all_month%12;
+	return $year.'年'.$month.'个月';
+}
+
+function _content_custom_top_banner(){	
+	$node_type = '';
+	if(arg(0) == 'node' && is_numeric(arg(1))){
+		$node_type = _content_custom_get_node_type(arg(1));
+		if(!$node_type){//unvalid url
+			drupal_not_found();
+		}
+	}
+	
+	//for user pages
+	if( in_array(arg(0), array('user', 'users', 'notices', 'interview', 'relationships','myuserpoints','invite', 'messages', 'mycampreport')) 
+		|| in_array($_GET['q'], array('node/add/experience', 'node/add/question', 'node/add/grow', 'node/add/resource','node/add/daily-virtue')) 
+		|| (in_array($node_type,array('experience', 'question', 'interview', 'grow', 'daily_virtue', 'resource')) && arg(2) == 'edit')
+		|| (arg(2) == 'grow' && is_numeric(arg(3))))
+	{
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/user-banner.png">';
+	}	
+	
+	//for orgnization pages
+	if( in_array($_GET['q'], array('node/add/orgnization')) 
+	|| $node_type == 'orgnization'
+	|| in_array(arg(0), array('orgnization', 'orgnizations')))
+	{
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/orgnization-banner.png">';
+	}
+	
+	//for experience pages
+	if(in_array(arg(0), array('experience', 'files', 'userpoll'))
+	   ||in_array($node_type,array('experience', 'resource', 'argument')))
+	{
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/experience-banner.png">';
+	}
+	
+	//for question pages
+	if(arg(0) == 'questions' || $_GET['q'] == 'node/add/survey'
+	||in_array($node_type,array('question', 'polluser')))
+	{
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/question-banner.png">';
+	}
+	
+	//for grow pages
+	if(arg(0) == 'grows'
+	||in_array($node_type,array('grow'))){
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/grow-banner.png">';
+	}
+	
+	//for camp pages
+	if(in_array(arg(0), array('camp', 'campmore', 'mem'))
+	||in_array($_GET['q'], array('node/add/member-camp','node/add/apply-mem','node/add/apply-org', 'node/add/node-gallery-gallery'))
+	||in_array($node_type,array('node_gallery_image', 'node_gallery_gallery', 'member_camp'))){
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/camp-banner.png">';
+	}
+	
+	//for virtue pages
+	if(in_array(arg(0), array('virtue', 'present'))
+	||in_array($_GET['q'], array('node/add/aeb-virtue'))
+	||in_array($node_type,array('aeb_virtue'))){
+		return '<img src="'.base_path().drupal_get_path('module', 'content_custom').'/images/virtue-banner.png">';
+	}	
+	
+}
+
+//首页美德入口
+function _content_custom_four_pictures(){	
+	return '<div class="main02_R" onclick="window.location=\'funcard\'" style="cursor:pointer;">
+				<div class="pic"><img height="205" width="295" src="'.drupal_get_path('module', 'content_custom').'/images/funcard_mini.jpg"></div>
+			</div>';
+}
+
+//url测试
+function _content_custom_url(){	
+	$url = $_SERVER['HTTP_HOST'];
+	return '<div class="main02_R" onclick="window.location=\'funcard\'" style="cursor:pointer;">
+				'.$url.'
+			</div>';
+}
+
+function _content_custom_baby_bill(){
+	return ' <a href="#"><img height="122" width="319" src="'.drupal_get_path('module', 'content_custom').'/images/bnt05.jpg"></a>';
+}
+
+function _content_custom_news_room(){
+	
+	$img = '<img height="122" width="319" src="'.drupal_get_path('module', 'content_custom').'/images/bnt06.jpg">';
+	return l($img, 'files/list', array('html' => true));
+	
+}
+
+//output Hot search block
+function _content_custom_hot_search(){	
+	global $user;
+	
+	if($cache = cache_get('homepage_hotwords')){				
+		return $cache -> data;
+	}
+	
+	//get hot area data
+	$menuinfo_hotareas = menu_load('menu-hotarea');
+	$hotareas = menu_tree_page_data('menu-hotarea');
+	$areas = $menuinfo_hotareas['title'].':';
+	foreach($hotareas as $item){
+		$areas .= l($item['link']['title'], $item['link']['link_path']).'|';
+	}
+	
+	//get hot search data
+	$menuinfo_hotsearch = menu_load('menu-hot-search');
+	$hotsearchs = menu_tree_page_data('menu-hot-search');
+	$hotsearch = $menuinfo_hotsearch['title'].':';
+	foreach($hotsearchs as $item){
+		$hotsearch .= l($item['link']['title'], $item['link']['link_path']);
+	}
+	
+	$register_btn ='';	
+	if(!$user -> uid){
+		$register_btn = '<div class="register"><a href="'.base_path().'user/register"></a></div>';	
+	}
+	else{
+		$register_btn = '<div class="register logined"><a href="'.base_path().'user/register"></a></div>';	
+	}
+	
+	$output =  '<div class="main01 clearfix">
+				<div class="mainbg01"><img height="107" width="10" src="'.drupal_get_path('module', 'content_custom').'/images/bg_01.png"></div>
+				<div class="main01_neirong">
+					
+					<div class="content01">
+						'.$areas.'
+					</div>		
+					
+					<div class="content02">			
+						<div class="content_text">
+						'.$hotsearch.'
+						</div>
+						<div class="btn03"><a href="'.base_path().'user"><img height="33" width="120" src="'.drupal_get_path('module', 'content_custom').'/images/bnt03.jpg"></a></div>	
+					    '.$register_btn.'
+					</div>
+				</div>
+				<div class="mainbg02"><img height="108" width="156" src="'.drupal_get_path('module', 'content_custom').'/images/welcome.jpg"></div>
+			</div>';
+	cache_set('homepage_hotwords', $output);
+	return $output;
+}
+
+
+/*
+ * hook_init
+ */
+function content_custom_init(){
+	//将nodetype定义为全局变量，给block用
+	if(arg(0) == 'node' && is_numeric(arg(1))){
+		global $nodetype;
+		$sql = "select type from {node} where nid = %d";
+		$result = db_query($sql, arg(1));
+		if($row = db_fetch_object($result)){
+			$nodetype = $row -> type;
+		}
+	}	
+
+
+	//add abusolute path for the js
+	global $base_url;
+	drupal_add_js(' var rooturl = "'.$base_url.'";', 'inline');
+	
+	//定制整个网站的面包屑
+	_cc_custom_breadcrumb();
+	
+	
+	//for user object	
+	global $user;
+	if($user -> uid){
+		$points = userpoints_get_current_points($user->uid);       
+        $relationships_count = user_relationships_load(array('user' => $user -> uid, 'approved' => 1), array('count' =>true));
+        $user -> points = $points;
+        $user -> friends_count = $relationships_count > 0?$relationships_count:0;
+        $user -> level = _content_custom_user_level($points);
+	}
+
+	
+	//修改上传文件的名称从而可以上传中文文件名的文件
+	if($_FILES && is_array($_FILES['files']['name'])){			
+		foreach($_FILES['files']['name'] as $key => $value){
+			if($value){
+			$type = explode("." , $value);
+			$_FILES['files']['name'][$key] = time().'.'.$type[1];
+			}
+		}
+	}	
+
+}
+
+/**
+ * 定制整个网站的面包屑
+ * @return unknown_type
+ */
+function _cc_custom_breadcrumb(){
+	
+	$breadcrumb = drupal_get_breadcrumb();
+	
+	if($_GET['q'] == 'experience'){		
+		$breadcrumb[] = l('经验分享', 'experience');
+		
+	}
+	if($_GET['q'] == 'orgnization/comment'){
+		$breadcrumb[] = l('帮友点评', 'orgnization/comment');
+	}
+	if($_GET['q'] == 'questions'){
+		$breadcrumb[] = l('你问我答', 'questions');
+	}
+	if(arg(0) == 'orgnizations' && arg(1) == 'search'){
+		$breadcrumb[] = l('商户搜索', 'orgnizations/search');
+		
+		//get the term name
+		if(is_numeric(arg(2))){
+			$term = taxonomy_get_term(arg(2));
+			$breadcrumb[] = l($term -> name, 'orgnizations/search/'.$term -> tid);
+		}				
+
+	}
+	if(arg(0) == 'virtue' || $_GET['q'] == 'node/950' || arg(0) == 'present'){
+		$breadcrumb[] = l('儿童成长记录', 'virtue');		
+	}
+	
+	if($_GET['q'] == 'camp' || arg(0) == 'mem'){
+		$breadcrumb[] = l('爱儿帮探营', 'camp');
+	}
+
+	if(arg(0) == 'files'){
+		$breadcrumb[] = l('收藏资源共享', 'files/list');
+		
+		if(arg(1) != 'list' || $GET['q'] == 'list'){
+			$breadcrumb[] = l('收藏资源共享', 'files/list');
+		}
+	}
+
+	
+	drupal_set_breadcrumb($breadcrumb);
+}
+
+function  _cc_custom_virtue_form(){
+  $form['content'] = array(
+    '#type' => 'textarea',
+    '#resizable' => false,    
+    '#default_value' => $_GET['w']?$_GET['w']:'请填入成长记录',
+  );
+  $form['path'] = array(
+    '#type' => 'hidden',
+  	'#value' => $_GET['q']
+  );
+  
+	$form['#attributes']['enctype'] = 'multipart/form-data';
+	$form['imagepath'] = array(
+	  '#type' => 'hidden',
+
+
+	);
+	
+	$form['fileid'] = array(
+	  '#type' => 'hidden',
+
+
+	);
+	global $base_url;
+	$form['attachments']= array(	       
+        '#value' => '
+		<label class="formlabel"></label><input  type="file" class="file" name="fileToUpload" id="fileToUpload"  />
+		<input type="button" class="button" value="上传图片" onclick="return ajaxFileUpload();" style="padding:0;" />
+		<img id="loading" src="'.$base_url.'/sites/all/themes/zen/zen-internals/plugins/ajaxfileupload/loading.gif" style="display:none;">
+		<img style="height:120px;display:none;" id="imagepreview" src="" /><br/>
+		<script type="text/javascript" src="'.$base_url.'/sites/all/themes/zen/zen-internals/plugins/ajaxfileupload/ajaxfileupload.js"></script>
+		<script type="text/javascript">	
+			function ajaxFileUpload()
+			{
+				$("#loading")
+				.ajaxStart(function(){
+					$(this).show();
+					$("#imagepreview").hide();
+				})
+				.ajaxComplete(function(){
+					$(this).hide();
+				});
+			
+				$.ajaxFileUpload
+				(
+					{
+						url:"'.$base_url.'/swfupload/upload",
+						secureuri:false,
+						fileElementId:"fileToUpload",
+						dataType: "json",
+						success: function (data, status)
+						{				
+							if(data.status == 1)//成功
+							{					
+								$("#imagepreview").attr("src", data.image).show();
+								$("#edit-fileid").attr("value", data.fid);
+							}else//失败 
+							{
+								alert("上传失败");
+							}
+			
+						},
+						error: function (data, status, e)
+						{
+							alert(e);
+						}
+					}
+				)
+				return false;
+			}
+		
+		
+		  $(document).ready(function(){
+		  	 $("#edit-content").focus(function(){
+		  	    if($(this).val() == "请填入成长记录"){
+		  	 		$(this).html("");
+		  	 	}	
+			 });
+			$("#edit-submit").hover(function(){$(this).addClass("hover");},function(){$(this).removeClass("hover");});	
+			});			
+		</script>',
+      );  
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => ''
+  );
+  drupal_add_js('
+	
+  })
+  ', 'inline');
+ 
+  return $form;
+}
+
+function  _cc_custom_virtue_form_submit($form, &$form_state){
+  global $user;
+  if(!$user -> uid){
+  	 drupal_goto('user/login','destination='.urlencode(url($form_state['values']['path']).'?w='.$form_state['values']['content']));
+  }
+ 
+  $fid = $form_state['values']['fileid'];
+  
+  $node = new StdClass();
+  $node -> type = 'daily_virtue';
+  $node -> comment = 2;
+  $node -> title = $form_state['values']['content']; 
+  $node -> uid = $user->uid;
+  $node -> field_single_date[0]['value'] = time();
+  if(is_numeric($fid)){
+  	$node -> field_grow_image[0]['fid'] = $fid;
+  	db_query("update {files} set status=1 where fid=".$fid);
+  }
+
+  node_save($node);
+  drupal_set_message("成长记录提交成功！");
+  drupal_goto($_GET['q'], '#uservirtues');
+}
+
+/*
+ * hook_perm
+ */
+function content_custom_perm() {
+	return array('send sms','passport');
+} 
+

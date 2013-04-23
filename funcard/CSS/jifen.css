@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+
+#jifen{ border-top:1px solid #f8cd7b; overflow:hidden;}
+#jifen .jifen_left{width:210px; float:left; overflow:hidden;}
+
+#jifen .jifen_left dl{}
+
+#jifen .jifen_left dl dt{height:32px; line-height:32px; background:url(images/jifen_left_th.png); font-size:12px; font-weight:bold; color:#ff9204; padding-left:40px;}
+#jifen .jifen_left dl dd{}
+#jifen .jifen_left dl dd ul{}
+#jifen .jifen_left dl dd ul li{height:30px; line-height:30px; padding-left:40px;}
+#jifen .jifen_left dl dd ul li.current,#jifen .jifen_left dl dd ul li.hover{ background:url(images/jifen_left_th.png) 0 -32px;}
+#jifen .jifen_left dl dd ul li a{ font-size:12px; color:#898989; padding-left:10px; background:url(images/li-style.gif) left center no-repeat;}
+
+#jifen .jifen_right{width:748px; float:right; border-left:1px solid #f9d9a8; padding-left:10px; overflow:hidden;}
+
+#userCenter_home{ font-size:12px; font-family:Arial, "宋体"; padding: 25px;}
+#userCenter_home .dzqz,
+#userCenter_home .jfhl{font-size:14px;}
+#userCenter_home .welcome{ height:30px; line-height:30px; color:#ff9204;}
+
+.jifen_box{width:685px; overflow:hidden; margin: 10px 0;}
+.jifen_box .th{height:43px; overflow:hidden; background:url(images/jifen.gif) 0 -40px;}
+.jifen_box .th span{ padding-left:20px; padding-top:15px; float:left; font-weight:bold; color:#FFF;}
+.jifen_box .jifen_box_content{ width:685px; overflow:hidden;}
+
+
+#user_info{ padding:20px 0;}
+#user_info .left p{ height:24px; line-height:24px; padding-left:5px; color:#737373;}
+#user_info .left p span{ float:left;}
+#user_info .left p .edit{ float:left; padding-left:15px; background:url(images/edit.gif) left center no-repeat; color:#ff9204; text-decoration:underline; margin-left:10px;}
+#user_info .right{ font-size:14px; color:#666;}
+#user_info .right a{ color:#ff9204}
+
+#user_jifen{padding:20px 0; color:#737373;}
+
+#user_jifen table{background:url(images/jifen.gif) 0 -86px no-repeat; margin-top:10px;}
+#user_jifen td{height:24px; line-height:24px; padding: 0 15px;}
+#user_jifen table .th2 td{ height:45px; line-height:36px;}
+
+#checkjifen{ font-size:14px; color:#ff9204;}
+#checkjifen #checkList{ float:left; padding-right:15px; color:#ff9204; cursor:pointer;}
+#checkjifen .up{ background:url(images/checklist.gif) right top no-repeat;}
+#checkjifen .down{ background:url(images/checklist.gif) right bottom no-repeat;}
+
+#gift{}
+#gift ul{ padding: 20px 0;}
+#gift ul li{width:164px; height:287px; float:left; border:1px solid #ffdeab; margin:2px; overflow:hidden;}
+#gift ul li.hover{ background:#fffcf0; border-color:#FBC997;}
+#gift ul li img{display:block; width:144px; height:144px; margin: 10px auto;}
+#gift ul li span{display:block; text-align:center; height:24px; line-height:24px; color:#737373;}
+#gift ul li a.duihuan{display:block; width:128px; height:33px; margin: 5px auto; background:url(images/jifen.gif);}
+#gift ul li a.duihuan:hover{ background:url(images/jifen.gif) -127px 0;}
+
+#gift ul li.hover a.duihuan{background:url(images/jifen.gif) -267px 0;}
+#gift ul li.hover a.duihuan:hover{background:url(images/jifen.gif) -394px 0;}
+
+#gift ul li input.button_submit{display:block; width:128px; height:33px; background:url(images/jifen.gif); border:none; cursor:pointer; margin: 5px auto;}
+#gift ul li input.button_submit:hover{ background:url(images/jifen.gif) -127px 0;}
+#gift ul li.hover input.button_submit{ background:url(images/jifen.gif) -267px 0;}
+#gift ul li.hover input.button_submit:hover{ background:url(images/jifen.gif) -394px 0;}
+
+
+#lipin{padding:20px;}
+
+#lipin .lipin_img{float:left; width:240px;}
+#lipin .lipin_img img{width:240px;}
+
+#lipin .lipin_info{ float:right; width:400px;}
+#lipin .lipin_info h3{ line-height:40px; font-size:18px; color:#737373;}
+#lipin .lipin_info p{ height:30px; line-height:30px;}
+#lipin .lipin_info p.jifen{ color:#ff9900; font-weight:bold;}
+#lipin .lipin_info p.but{padding-top:20px;}
+
+#lipin input.duihuan{display:block; width:128px; height:33px; background:url(images/jifen.gif); border:none; cursor:pointer; margin: 5px auto;}
+#lipin input.duihuan:hover{ background:url(images/jifen.gif) -127px 0;}
+
+.return{float: right; margin-top:17px; margin-right:10px; color:#ff9204;}
+.notice{margin:10px; border:1px, solid, #000;}

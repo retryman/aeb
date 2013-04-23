@@ -1,0 +1,338 @@
+<?php
+/**
+ * $Id: taxonomy_blocks.module,v 1.3.2.3 2009/12/17 23:16:19 owahab Exp $
+ *
+ * @file taxonomy_blocks.module
+ *  Creates blocks with lists of a taxonomy vocabulary.
+ */
+
+/**
+ * Implementation of hook_block().
+ */
+function taxonomy_blocks_block($op = 'list', $delta = 0, $edit = array()) {
+  if ($op == 'list') {
+    // Get a list of all variables we declare in varibale table
+    $query = db_query('SELECT * FROM {variable} WHERE name LIKE "taxonomy_blocks_vid_%_block_enabled"');
+    while ($result = db_fetch_object($query)) {
+      $vid = NULL;
+      // Check for variables with value = 1
+      if ($result->value == serialize(1)) {
+        // Extract the vocabulary ID from the variable name
+        $vid = str_replace('taxonomy_blocks_vid_','', $result->name);
+        $vid = str_replace('_block_enabled','', $vid);
+        $count = variable_get('taxonomy_blocks_vid_' . $vid . '_count',1);
+        
+        $vocab = taxonomy_vocabulary_load($vid);
+        
+        if (!$vocab) // deleted vocab
+        {
+        	variable_del($result->name);
+        	continue;
+        }
+        
+        // generate number of blocks
+        for ($i = 0;$i < $count;$i++)
+        {
+        	$bid = $vid . '-' . $i;
+        	$blocks[$bid]['info'] = t('Taxonomy Block: !vocab [!index]', array('!vocab' => $vocab->name,'!index' => $i));
+        }
+      }
+    }
+  }
+  elseif ($op == 'configure')
+  {
+  	$options = array();
+  	
+  	$options['0'] = t('<Root>');
+  	
+  	foreach (taxonomy_get_tree($delta) as $term)
+  	{
+  		$options[$term->tid] = str_repeat("  -",$term->depth) . " " . t($term->name);
+  	}
+  	
+  	$form['root_term'] = array
+  	(
+  		'#type' => 'select',
+  		'#title' => t('Root term'),
+  		'#options' => $options,
+  		'#default_value' => variable_get("taxonomy_blocks_vid_{$delta}_root",0),
+  	);
+  	
+    $form['tree_depth'] = array(
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#title' => t('Tree Depth'),
+      '#description' => t('Specify the number of levels shown from the vocabulary. Default is 0 which is equivilant to unlimited.'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $delta .'_tree_depth', 0),
+    );
+    
+	$form['block']['show_empty'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show Empty Terms'),
+      '#description' => t('If checked, terms with no members will be shown.'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $delta .'_show_empty', 1),
+      '#weight' => -8,
+    );
+    
+    $form['block']['show_node_count'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show Number Of Nodes'),
+      '#description' => t('If checked, terms with be suffixed by number of member nodes.'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $delta .'_show_node_count', 0),
+      '#weight' => -7,
+    );
+  	
+  	return $form;
+  }
+  elseif ($op == 'save')
+  {
+  	// save all to settings
+  	variable_set("taxonomy_blocks_vid_{$delta}_root",(int)$edit['root_term']);
+  	variable_set("taxonomy_blocks_vid_{$delta}_tree_depth",(int)$edit['tree_depth']);
+  	variable_set("taxonomy_blocks_vid_{$delta}_show_empty",(int)$edit['show_empty']);
+  	variable_set("taxonomy_blocks_vid_{$delta}_show_node_count",(int)$edit['show_node_count']);
+  }
+  elseif ($op == 'view') {
+  	$bits = explode('-',$delta);
+  	$vid = $bits[0];
+  	$index = $bits[1];
+    $vocab = taxonomy_vocabulary_load($vid);
+    
+    $blocks = array(
+      'subject' => $vocab->name . ($index ? " [$index]" : ""),
+      'content' => theme('taxonomy_blocks_block_content', $vid, $index)
+    );
+  }
+  return $blocks;
+}
+
+/**
+ * Render a list of terms inside a block.
+ * 
+ * @param $vid
+ *       ID of the rendered vocabulary.
+ * 
+ * @return HTML unordered list of terms.
+ */
+function theme_taxonomy_blocks_block_content($vid,$index) {
+  $delta = $vid . '-' . $index;	
+
+  $depth = variable_get('taxonomy_blocks_vid_'. $delta .'_tree_depth', 0);
+  $parent = variable_get('taxonomy_blocks_vid_' . $delta . '_root',0);
+  $show_empty = variable_get('taxonomy_blocks_vid_'. $delta .'_show_empty', 0);
+  $show_node_count = variable_get('taxonomy_blocks_vid_'. $delta .'_show_node_count', 0);
+  
+  $depth == 0? $depth = NULL : '';
+  // Get taxonomy tree
+  $tree = taxonomy_get_tree($vid, $parent, -1, $depth);
+  // Parse the tree
+  if ($tree) {
+  	$first_loop = TRUE;
+  	
+  	$index = 1;
+    foreach ($tree as $term) {
+      // Filter using PHP code:
+      
+      if ($code != '')
+      {
+      	$code = '<?php $tid = '. $term->tid .'; $vid = '. $vid .'; ';
+      	$code .= variable_get('taxonomy_blocks_vid_'. $vid .'_filter_php', '');
+      	$code .= '?>';
+      	$show =  drupal_eval($code);
+      }
+      else
+      {
+      	$show = false;
+      }
+      
+      $count = taxonomy_blocks_count_nodes($term->tid);
+      
+     
+      
+      if ($show == TRUE || $count > 0 || $show_empty == 1) {
+        if ($term->depth > $old_depth) {
+          $output .= '<ul class="level2">';
+        }
+        elseif ($term->depth < $old_depth) {
+          $output .= '</ul>';
+        }
+        else {
+          if ($first_loop == TRUE)
+          {
+            $first_loop = FALSE;
+          }
+          else {
+            $output .= '</li>';
+          }
+        }
+		if($index == 1){
+			$output .= '<li class="first term'.$term->tid.'">';
+		}
+		else{
+        	$output .= '<li class="term'.$term->tid.'">';
+		}
+        $index++;
+        $path = 'taxonomy/term/' . $term->tid;
+        
+        //$path = variable_get('taxonomy_blocks_vid_'. $vid .'_path_prefix', 'taxonomy/term');
+        //if (module_exists('token')) {
+        //  $path = token_replace($path, 'taxonomy', $term);
+        //}
+        //else {
+        //  $path .= '/'. $term->tid;
+        //}
+        
+        $output .= l(t($term->name), $path);
+        
+        if ($show_node_count == 1) {
+          $output .= theme('taxonomy_blocks_node_count', $count);
+        }
+          
+        $old_depth = $term->depth;
+      }
+    }
+    if (!is_null($output)) {
+      $output = '<ul class="level1">'. $output .'</li></ul>';
+    }
+  }
+  
+  return $output;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function taxonomy_blocks_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'taxonomy_form_vocabulary') {
+    // Force the form submission to be passed to our function as well
+    $form['#submit'][] = 'taxonomy_blocks_vocabulary_form_submit';
+    // Get the vocabulary ID
+    $vid = $form['vid']['#value'];
+    // Have to set these in order to show our form items at the bottom
+    $form['submit']['#weight'] = 10;
+    $form['delete']['#weight'] = 10;
+    // Adding our settings items
+    $form['block'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Block'),
+      '#collapsed' => FALSE,
+      '#collapsible' => TRUE,
+      '#weight' => 9,
+    );
+    $form['block']['taxonomy_blocks_vid_'. $vid .'_block_enabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Provide Block'),
+      '#description' => t('If checked, this vocabulary will provide a block.'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $vid .'_block_enabled', 0),
+      '#weight' => -11,
+    );
+    $form['block']['taxonomy_blocks_vid_'. $vid .'_count'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Number of Blocks'),
+      '#description' => t('Enter number of blocks you want to create from this vocabulary.'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $vid .'_count', 1),
+      '#weight' => -10,
+    );
+    
+    // this thing only confuse user
+    /*
+     $form['block']['taxonomy_blocks_vid_'. $vid .'_path_prefix'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Menu Path'),
+      '#description' => t('Specify the path prefix for menu items shown in the block, by default this is set to "taxonomy/term".'),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $vid .'_path_prefix', 'taxonomy/term'),
+      '#weight' => -6,
+    ); 
+     if (module_exists('token')) {
+      $form['block']['taxonomy_blocks_vid_'. $vid .'_path_prefix']['#description'] .= t('You may also use the following tokens:');
+      $form['block']['taxonomy_tokens'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Replacement patterns'),
+        '#collapsed' => TRUE,
+        '#collapsible' => TRUE,
+        '#weight' => -5,
+      );
+      $patterns = token_get_list('taxonomy');
+      foreach ($patterns as $type => $pattern_set) {
+        if ($type != 'global') {
+          foreach ($pattern_set as $pattern => $description) {
+            $form['block']['taxonomy_tokens']['#value'] .= '<dt>['. $pattern .']</dt><dd>'. $description .'</dd>';
+          }
+        }
+      }
+    }*/
+    
+    $form['block']['taxonomy_blocks_vid_'. $vid .'_filter_php'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Filter'),
+      '#description' => t('Enter PHP code (without %php) to be evaluated on each term and if the code returns <code>TRUE</code>, the term will be shown. Note that executing incorrect PHP-code can break your Drupal site. The code will have to deal with $tid as the term ID and $vid as the vocabulary ID.', array('%php' => '<?php ?>')),
+      '#default_value' => variable_get('taxonomy_blocks_vid_'. $vid .'_filter_php', NULL),
+      '#weight' => -4,
+    );
+  }
+}
+
+/**
+ * Handle submission of Taxonomy vocabulary form.
+ */
+function taxonomy_blocks_vocabulary_form_submit($form_id, &$form_state) {
+  $edit =& $form_state['values'];
+	
+  foreach ($edit as $field => $value) {
+    if (strpos($field, 'taxonomy_blocks_') === 0) {
+      if (!isset($value) || $value === 0) {
+        variable_del($field);
+      }
+      else {
+        variable_set($field, $value);
+      }
+    }
+  }
+  // Must invalidate blocks cache
+  cache_clear_all();
+  drupal_set_message(t('Updated block settings.'));
+}
+
+function taxonomy_blocks_count_nodes($tid, $type = 0) {
+  static $count;
+
+  if (!isset($count[$type])) {
+    // $type == 0 always evaluates TRUE if $type is a string
+    if (is_numeric($type)) {
+      $result = db_query(db_rewrite_sql('SELECT t.tid, COUNT(n.nid) AS c FROM {term_node} t INNER JOIN {node} n ON t.nid = n.nid WHERE n.status = 1 GROUP BY t.tid'));
+    }
+    else {
+      $result = db_query(db_rewrite_sql("SELECT t.tid, COUNT(n.nid) AS c FROM {term_node} t INNER JOIN {node} n ON t.nid = n.nid WHERE n.status = 1 AND n.type = '%s' GROUP BY t.tid"), $type);
+    }
+    while ($term = db_fetch_object($result)) {
+      $count[$type][$term->tid] = $term->c;
+    }
+  }
+
+  return $count[$type][$tid] + $children_count;
+}
+
+/**
+ * Theme the count of nodes shown beside a term link.
+ * 
+ * @param $count 
+ * 
+ * @return HTML representation of node count.
+ */
+function theme_taxonomy_blocks_node_count($count) {
+  return ' ('. $count .')';
+}
+
+/**
+* Implementation of hook_theme().
+*/
+function taxonomy_blocks_theme() {
+	return array(
+		'taxonomy_blocks_block_content' => array(
+			'arguments' => array('vid','index'),
+		),
+		'taxonomy_blocks_node_count' => array(
+			'arguments' => array('count'),
+		)
+	);
+}

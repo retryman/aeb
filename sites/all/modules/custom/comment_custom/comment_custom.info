@@ -1,0 +1,5 @@
+name = Comment custom
+description = Control the comment form and data.
+package = AEB
+core = 6.x
+version = 6.x-1.0

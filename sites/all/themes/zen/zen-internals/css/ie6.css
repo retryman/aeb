@@ -1,0 +1,122 @@
+/* $Id: ie6.css,v 1.6.2.2 2010/06/26 16:01:52 johnalbin Exp $ */
+
+/* Id: ie6.css,v 1.6 2009/11/04 20:16:50 johnalbin Exp */
+
+/**
+ * @file
+ * CSS targeted specifically for Internet Explorer 5 and 6 for Windows.
+ *
+ * Any CSS in this file will override the rules specified in the ie.css file.
+ */
+
+
+/*
+ * Layout CSS
+ */
+
+body {
+  text-align: center; /* 1st part of IE5/IE6quirks centering hack */
+}
+
+#page {
+  text-align: left; /* LTR */ /* 2nd part of IE5/IE6quirks centering hack */
+}
+
+#main-wrapper {
+  zoom: 1; /* Otherwise with a liquid layout, sidebars disappear when resizing the windows in IE6 */
+}
+
+#content,
+#navigation,
+.region-sidebar-first,
+.region-sidebar-second /* Floating divs */ {
+  display: inline; /* display inline or double your floated margin! [1] */
+  overflow: hidden; /* in ie6, overflow auto is broken [2] and so is overflow visible [3] */
+  overflow-y: visible;
+}
+
+/*
+ * Tabs - IE 5 and 6 don't support PNGs with alpha transparency.
+ */
+
+ul.primary li a,
+ul.primary li a .tab,
+ul.secondary li a,
+ul.secondary li a .tab {
+  display: inline-block; /* Otherwise the blocks mistakenly get 100% width in IE6 */
+}
+
+ul.primary li a {
+  background: url(../images/tab-left-ie6.png) no-repeat left -38px;
+}
+
+ul.primary li a .tab {
+  background: url(../images/tab-right-ie6.png) no-repeat right -38px;
+}
+
+ul.primary li a:hover {
+  background: url(../images/tab-left-ie6.png) no-repeat left -76px;
+}
+
+ul.primary li a:hover .tab {
+  background: url(../images/tab-right-ie6.png) no-repeat right -76px;
+}
+
+ul.primary li.active a,
+ul.primary li.active a:hover {
+  background: url(../images/tab-left-ie6.png) no-repeat left 0;
+}
+
+ul.primary li.active a .tab,
+ul.primary li.active a:hover .tab {
+  background: url(../images/tab-right-ie6.png) no-repeat right 0;
+}
+
+/*
+ * Messages - IE 5 and 6 don't support PNGs with alpha transparency.
+ */
+
+div.messages,
+div.status,
+div.warning,
+div.error /* Important messages (status, warning, and error) for the user */ {
+  background-image: url(../images/messages-status-ie6.png);
+}
+
+div.warning /* Medium priority messages */ {
+  background-image: url(../images/messages-warning-ie6.png);
+}
+
+div.error /* High priority messages. See also the .error declaration below. */ {
+  background-image: url(../images/messages-error-ie6.png);
+}
+#block-views-resource-block_1 .view-content,
+#block-views-flag_bookmarks-block_1 .view-content,
+#block-content_custom-7 .view-content,
+#block-views-question-block_6 .view-content{
+	padding:0 0 8px 20px;
+}
+body.page-experience .flag-wrapper,
+body.page-experience .views-field-picture{
+	position:static;
+}
+body.page-experience .pane-fileshare .views-row .views-field-title{
+	margin:0 3px 0 5px;
+}
+body.section-virtue .infiniteCarousel .forward,
+body.section-virtue .infiniteCarousel .back,
+body.section-virtue #virtue-notice .dragger,
+body.section-virtue.node-type-aeb-virtue .luckyNo .more,
+body.section-virtue.node-type-aeb-virtue .day-award .banner .title,
+body.section-virtue.node-type-aeb-virtue .award-users .banner .title,
+body.section-virtue .ad-virtue-box .banner .title,
+body.section-virtue .calendar-calendar .banner .title,
+body.section-virtue .award-user .banner .title,
+body.section-virtue .virtue-notice .banner .title,
+body.section-virtue .award-user .award-cup{
+background-image: url('../images/virtue-ie6.png');}
+body.page-camp .pane-camp-2 h2{margin:14px 0 0 10px;}
+body.page-camp .pane-camp-2 .column{margin-left:7px;}
+.nodenode_gallery_gallery .top-description .image{left:0;margin-left:8px;}
+#block-views-advertisement-block_1{position:absolute;top: expression(documentElement.scrollTop+ 150 + "px");left:expression(documentElement.scrollRight +0+ "px"); }
+body.page-experience .expericen-argument-new .up-score{margin:0 8px 0 15px;}

@@ -1,0 +1,433 @@
+@charset "utf-8";
+/* CSS Document */
+
+.p_coupon
+{
+	border:#999 solid 0.1em;
+	font-family: 微软雅黑;
+	font-size: 1em;
+	text-align: center;
+	padding: 8px;
+}
+
+.all_coupon
+{
+	border:#999 solid 0.1em;
+	font-family: 微软雅黑;
+	font-size: 1em;
+	text-align: center;
+	padding: 8px;
+}
+
+.all_logo
+{
+	border:#999 solid 1px;
+	font-family: 微软雅黑;
+	font-size: 1em;
+	text-align: center;
+	padding: 8px;
+	width:225px;
+	height:65px;
+}
+
+.p_table
+{
+	border-spacing: 35px;
+}
+
+.logo_table
+{
+	border-spacing: 6px;
+}
+
+.all_table
+{
+	border-spacing: 7px;
+}
+
+.outer_table
+{
+	border:#999 solid 0.1em;
+}
+
+.inner_table
+{
+	border-bottom:#999 solid 0.1em;
+	border-top:#999 solid 0.1em;
+}
+
+.normal_text
+{
+	font-family: 微软雅黑;
+	font-size: 1em;
+}
+
+.print_text
+{
+	font-family: 微软雅黑;
+	font-size: 1.3em;
+	color:#000;
+	background-color:#FC3;
+	border:#000 dashed medium;
+}
+
+.all_list
+{
+	display:block; overflow:hidden; margin-top:5px; margin-bottom:5px;
+	width: 300px;
+}
+
+.c_list
+{
+	width:100px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; margin:5px; border:#ccc 2px solid; margin-left:0px; list-style:none; overflow:hidden;
+}
+
+.navigation
+{
+	float:right; margin:0; list-style:none; position:relative; top:-13px; right:30px;
+}
+
+.navigation li
+{
+	float:left; font-weight:bolder; height:20px; text-align:center;
+}
+
+.navigation a
+{
+	display:block; border:1px solid; color:#FFF; margin-left:0.13em; font-size:0.8em; text-decoration:none; padding-left:1em; padding-right:1em; padding-top:0.5em; padding-bottom:0.5em; border-color:#690; background-color:#690; width:65px; 
+	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; behavior: url(border-radius.htc);
+}
+
+.navigation a:focus,
+.navigation a:hover
+{
+	background-color:#F90; border-color:#F90;
+}
+
+body
+{
+	width:900px;	margin:0 auto; 
+}
+
+.banner
+{
+	width:900px; height:123px; float:right; list-style:none; margin:0px; padding:0px; background-color:#FCF8EF; border-bottom:#F90 4px solid;
+}
+
+.banner li
+{
+	float:left; margin: 0px;
+}
+
+.banner_2
+{
+	width:900px; background-color:#FFF;
+}
+
+.loginfo
+{
+	font-family:微软雅黑; width:900px;  background-color:#FCF8EF; text-align:right;
+}
+
+a
+{
+	font-family:微软雅黑; text-decoration:none; color:#00B;
+}
+
+.verifi_alert
+{
+	font-size: 1.5em; font-family: 微软雅黑; font-weight:bold; text-align:center;
+}
+
+.verifi_alert_2
+{
+	font-size: 1.5em; font-family: 微软雅黑; font-weight:bold; text-align:center; color:#F00; margin-top:30px;
+}
+
+.verifi_my_coupon
+{
+	list-style: square;
+}
+
+.verifi_my_coupon li
+{
+	margin: 5px; font-size: 1.1em; border-bottom: 1px solid #333; width: 250px;
+}
+
+.verifi_logout
+{
+	font-family:微软雅黑; text-decoration:none; float: right;
+}
+
+.verifi_coupon_by_id
+{
+	list-style:none; left:150px; position:relative; border:1px solid #333; width:550px;
+}
+
+.verifi_coupon_by_id li
+{
+	font-family:微软雅黑; margin:5px; font-size:1.2em; font-weight:bold; border-bottom:1px solid #333; width:500px;
+}
+
+.verifi_user_present
+{
+	list-style:none; float:right; min-width: 600px;
+}
+.verifi_user_present li
+{
+	margin:5px; float:left; width:380px; height:165px; border: 1px solid #F90;font-family:微软雅黑;
+}
+.verifi_user_present li div
+{
+	float:right; margin-right: 30px;
+}
+.verifi_user_present li img
+{
+	width: 200px; height:165px;
+}
+
+.verifi_all_present
+{
+	list-style:none; float:right; min-width: 300px;
+}
+.verifi_all_present li
+{
+	margin:5px; float:left; width:180px; height:270px; border: 1px solid #F90;font-family:微软雅黑;
+}
+.verifi_all_present li:hover
+{
+	background-color:#FFFCF1;
+}
+.verifi_all_present li div
+{
+}
+.verifi_all_present li img
+{
+	width: 180px; height:165px;
+}
+
+.verifi_all_present_div
+{
+	font-family:微软雅黑;
+}
+.verifi_all_present_div_text
+{
+	font-size:0.9em; text-align:center; width:180px;
+}
+.verifi_all_present_div_text_2
+{
+	font-size:0.9em; text-align:center; width:180px;color:#FF9205; font-weight:bold;
+}
+.verifi_all_present_div_title
+{
+	font-weight:bold; font-size:1.1em; width:180px; text-align:center; padding-bottom: 3px;
+}
+.verifi_all_present_div_button
+{
+	width:180px; text-align:center;
+}
+
+.reg_ul
+{
+	list-style: none;
+	position: relative;
+	width:480px;
+	left: 200px;
+	padding: 25px;
+}
+.reg_ul li
+{
+	font-family: 微软雅黑;
+	font-size: 1em;
+	padding: 5px;
+	width:350px;
+	height:40px;
+}
+.reg_ul li:hover
+{
+	background-color:#EEE;
+}
+.reg_ul li div
+{
+	width: 150px;
+	float: left;
+}
+.reg_notice
+{
+	font-size:0.8em; color:#666; margin-left:150px;
+}
+
+.merchant_login
+{
+	list-style:none;
+	position:relative;
+	top: 20px;
+	left: 200px;
+	border:1px solid #333;
+	width: 400px;
+}
+
+.merchant_login li
+{
+	width:400px;
+	padding:5px;
+}
+
+.merchant_login li div
+{
+	width: 100px;
+	font-family: 微软雅黑;
+	font-size: 0.9em;
+	float: left;
+}
+
+.search_result
+{
+	list-style:none;
+	width: 500px;
+}
+
+.search_result li
+{
+	float: right;
+}
+
+.search_result li div
+{
+	width: 100px;
+	float: left;
+}
+
+.BG_top
+{
+	background-image:url(../sitePIC/passport/back_frame_top.png); background-repeat:no-repeat; width:900px; background-size: 100%; height:60px;
+}
+
+.BG_mid
+{
+	background-image:url(../sitePIC/passport/back_frame_middle.png); background-repeat:no-repeat; width:900px; background-size: 100% 100%; overflow:auto; height:auto;
+}
+.BG_bot
+{
+	background-image:url(../sitePIC/passport/back_frame_bottom.png); background-repeat:no-repeat; width:900px; background-size: 100% 100%; height:60px; position:relative; left: -1px;
+}
+
+.outer_event
+{
+	border:#999 solid 0.1em;
+}
+
+.event_title
+{
+	font-size: 1.5em; font-family: 微软雅黑; font-weight:bold; text-align:center; padding:3px;
+}
+
+.inner_event
+{
+	border-bottom:#999 solid 0.1em;
+	border-top:#999 solid 0.1em;
+	padding: 80px;
+	font-family: 微软雅黑;
+	font-size: 1em;
+}
+
+.event_ul
+{
+	list-style: none;
+	border:1px solid #999;
+	position: relative;
+	left: 160px;
+	padding: 25px;
+	width: 500px;
+}
+.event_ul li
+{
+	font-family: 微软雅黑;
+	font-size: 1em;
+	padding: 5px;
+	width:380px;
+	height:50px;
+}
+.event_ul li div
+{
+	width: 200px;
+	float: left;
+}
+
+.reg_button
+{
+	background-image:url(../sitePIC/button/button_register.png); width:143px; height:41px;
+}
+
+.mouse_over
+{
+	cursor:pointer;
+}
+
+.reset_button
+{
+	padding-right:5px;width:141px;padding-left:5px
+}
+
+.PP_reg_mid
+{
+	background-image:url(../sitePIC/passport/back_frame_middle.png); background-repeat:no-repeat; width:900px; background-size: 100% 100%; padding-top:20px; padding-bottom:20px;
+}
+
+.left_side_bar
+{
+	float: left; width:200px; position:relative; top:-20px; left:2px; border-right:solid 1px #F9D9A8;
+}
+
+.PP_mypage_mid
+{
+	background-image:url(../sitePIC/passport/back_frame_middle.png); background-repeat:no-repeat; width:900px; background-size: 100% 100%; padding-top:20px; padding-bottom:20px; height: auto; overflow:auto; border-top:solid 1px #F9D9A8;
+}
+
+
+.my_account_top
+{
+	background-color:#FFF3D9; font-family: 微软雅黑; font-size: 0.9em; width:200px; height: 30px;
+}
+
+.mypage_text_top
+{
+	color:#FF9205; padding-left:30px; padding-top:5px; font-weight:bold;
+}
+.mypage_text
+{
+	color:#666; padding-left:50px; padding:15px; font-family:宋体; font-size:0.8em;
+}
+.mypage_text a
+{
+	color:#666; font-family:宋体;
+}
+.mypage_text a:hover,
+mypage_text a:focus
+{
+	color:#00F; font-family:宋体;
+}
+
+.mypage_right
+{
+	 float:right; width:630px; position:relative; right: 50px;
+}
+
+.bar
+{
+	background-image:url(../sitePIC/bar/bar_1.png); background-repeat:no-repeat; width:auto; height:40px;
+}
+.bar p
+{
+	color:#FFF; font-weight:bolder; font-size: 0.9em; padding-top:13px; padding-left:22px;
+}
+
+.alert
+{
+	color:#F00; text-align:center; font-size:1em;
+}
+
+.rule
+{
+	font-size:0.8em; color:#666;
+}

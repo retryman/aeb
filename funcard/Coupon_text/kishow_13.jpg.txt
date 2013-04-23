@@ -1,0 +1,14 @@
+﻿<div>
+<p>
+ <span style="font-size: 14px"><strong><span style="color: #ff8c00">爱儿帮FUN卡优惠使用方式：</span></strong><br />
+ 点击右键下载优惠券。<strong>打印，并填写您的FUN卡卡号</strong>。与您家附近的疯狂家族教学中心联系，预约表演秀或者试听课。凭打印的优惠券+FUN卡卡号可于活动后换取各中心科学小礼品！</span></p>
+<p>
+ <span style="font-size: 14px"><strong><span style="color: #40e0d0">疯狂家族介绍：</span></strong><br />
+ 疯狂家族儿童俱乐部是一个为4-8岁儿童打造的&ldquo;儿童天地&rdquo; ，共占地约800-1000平方米；在疯狂家族，不仅有风靡全球的疯狂科学表演及课程，还有供儿童读书学习的&ldquo;大自然式&rdquo;图书区，玩具区、形似&ldquo;太空舱&rdquo;的多媒体区，以及三间风格各异的主题教室提供丰富多彩的科普知识。在这里，我们希望每个儿童都可以&ldquo;做自己&rdquo;，每一个小孩子都可以留下美好的回忆！</span></p>
+<p>
+ <span style="font-size: 14px">疯狂家族舞台秀利用欢乐的舞台剧表演的方式，传递科学知识；与家长、小朋友互动共同完成一系列的趣味实验。既达到寓教于乐的教育目的，同时也让家长和孩子达到彻底的放松及亲子交流。</span></p>
+<p>
+ <span style="font-size: 14px"><strong><span style="color: #40e0d0">疯狂家族环保秀：</span></strong><br />
+ 这两年，全球爆发着一系列的自然灾害：地震、干旱、洪涝灾害、火山爆发、高尔夫冰雹球&hellip;&hellip;面对着如此多的灾害，我们需要用科学拯救地球，且从小培养小朋友未来低碳、环保意识！</span></p>
+<p>
+ <span style="font-size: 14px">活动对象：4&mdash;8岁儿童家庭（报名人数限12-15个家庭/场/教学中心）</span></p></div>
